@@ -3,7 +3,7 @@ import s from './Post.module.css'
 
 type PropsPost = {
    message: string
-   likeCount: number
+   likesCount: number
 }
 
 const Post = (props: PropsPost) => {
@@ -12,7 +12,7 @@ const Post = (props: PropsPost) => {
          <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" alt="avatar"/>
          {props.message}
          <div>
-            <span>{props.likeCount} like</span>
+            <span>{props.likesCount} like</span>
          </div>
       </div>
    )

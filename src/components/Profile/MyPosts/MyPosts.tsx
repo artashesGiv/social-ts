@@ -5,13 +5,14 @@ import Post from './Post/Post'
 const MyPosts = () => {
    return (
       <div>
-         my post
+         my posts
          <div>
-            new post
+            <textarea/>
+            <button>add</button>
          </div>
          <div className={s.posts}>
-            <Post message="Hi, how are you?" likeCount={15}/>
-            <Post message="It's my first post" likeCount={20}/>
+            <Post message="Hi, how are you?" likesCount={15}/>
+            <Post message="It's my first post" likesCount={20}/>
          </div>
       </div>
    )

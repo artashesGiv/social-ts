@@ -11,7 +11,7 @@ const Profile = () => {
                alt="bg"/>
          </div>
          <div>
-            ava description
+            ava + description
          </div>
          <MyPosts/>
       </div>
