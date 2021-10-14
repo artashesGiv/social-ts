@@ -1,17 +1,30 @@
 import React from 'react'
+import s from './Navbar.module.css'
+
+console.log(s)
 
 const Navbar = () => {
-   return <nav className="nav">
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <div><a href="">Profile</a></div>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <div><a href="">Messages</a></div>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <div><a href="">News</a></div>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <div><a href="">Music</a></div>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <div><a href="">Settings</a></div>
+   return <nav className={s.nav}>
+      <div className={s.item}>
+         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+         <a>Profile</a>
+      </div>
+      <div className={`${s.item} ${s.active}`}>
+         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+         <a>Messages</a>
+      </div>
+      <div className={s.item}>
+         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+         <a>News</a>
+      </div>
+      <div className={s.item}>
+         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+         <a>Music</a>
+      </div>
+      <div className={s.item}>
+         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+         <a>Settings</a>
+      </div>
    </nav>
 }
 

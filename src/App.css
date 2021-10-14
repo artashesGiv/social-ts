@@ -13,21 +13,4 @@
     grid-gap: 10px;
 }
 
-.header {
-    grid-area: header;
-    background-color: darkslategrey;
-}
 
-.header img {
-    width: 50px;
-}
-
-.nav {
-    grid-area: nav;
-    background-color: orange;
-}
-
-.content {
-    grid-area: content;
-    background-color: darkgrey;
-}
