@@ -1,5 +1,6 @@
 import React from 'react'
-import s from './Navbar.module.css'
+import { NavLink } from 'react-router-dom'
+import s from './Navbar.module.scss'
 
 console.log(s)
 
@@ -7,24 +8,19 @@ const Navbar = () => {
    return (
       <nav className={s.nav}>
          <div className={`${s.item} ${s.active}`}>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a>Profile</a>
+            <NavLink to={"/profile"} activeClassName={s.active}>Profile</NavLink>
          </div>
          <div className={s.item}>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a>Messages</a>
+            <NavLink to={"/dialogs"} activeClassName={s.active}>Messages</NavLink>
          </div>
          <div className={s.item}>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a>News</a>
+            <NavLink to={"/news"} activeClassName={s.active}>News</NavLink>
          </div>
          <div className={s.item}>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a>Music</a>
+            <NavLink to={"/music"} activeClassName={s.active}>Music</NavLink>
          </div>
          <div className={s.item}>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a>Settings</a>
+            <NavLink to={"/settings"} activeClassName={s.active}>Settings</NavLink>
          </div>
       </nav>
    )
