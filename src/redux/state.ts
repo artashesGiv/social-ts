@@ -56,12 +56,6 @@ export let state: stateType = {
          {id: v1(), name: 'Maksim'},
          {id: v1(), name: 'Marina'},
          {id: v1(), name: 'David'},
-         {id: v1(), name: 'David'},
-         {id: v1(), name: 'David'},
-         {id: v1(), name: 'David'},
-         {id: v1(), name: 'David'},
-         {id: v1(), name: 'David'},
-         {id: v1(), name: 'David'},
       ],
       messages: [
          {id: v1(), message: 'Hi'},
