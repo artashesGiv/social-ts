@@ -1,5 +1,8 @@
 import {v1} from 'uuid'
+import {rerenderEntireTree} from '../render'
 
+
+// ================Типы===================
 //profile types
 export type postType = {
    id: string
@@ -40,6 +43,8 @@ export type stateType = {
    navbar: navbarType
 }
 
+
+// ================State===================
 export let state: stateType = {
    profilePage: {
       posts: [
@@ -73,6 +78,29 @@ export let state: stateType = {
          {name: 'Settings', link: '/settings'},
          {name: 'Friends', link: '/friends'},
       ]
-
    }
+}
+
+
+// ===============Функции=================
+export type addPostType = (postMessage: string) => void
+export const addPost = (postMessage: string) => {
+   const newPost: postType = {
+      id: v1(),
+      post: postMessage,
+      like: 0,
+   }
+   state.profilePage.posts.push(newPost)
+   rerenderEntireTree(state)
+}
+
+
+export type addMessageType = (postMessage: string) => void
+export const addMessage = (messageText: string) => {
+   const newMessage: messageType = {
+      id: v1(),
+      message: messageText,
+   }
+   state.dialogsPage.messages.push(newMessage)
+   rerenderEntireTree(state)
 }

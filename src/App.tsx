@@ -12,6 +12,8 @@ import {stateType} from './redux/state'
 
 type appPropsType = {
    state: stateType
+   addPost: (postText: string) => void
+   addMessage: (messageText: string) => void
 }
 
 const App = (props: appPropsType) => {
@@ -21,8 +23,8 @@ const App = (props: appPropsType) => {
             <Header/>
             <Navbar state={props.state.navbar}/>
             <div className="app-wrapper-content">
-               <Route path="/profile" render={ () => <Profile state={props.state.profilePage}/>}/>
-               <Route path="/dialogs" render={ () => <Dialogs state={props.state.dialogsPage}/>}/>
+               <Route path="/profile" render={() => <Profile state={props.state.profilePage} addPost={props.addPost}/>}/>
+               <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage} addMessage={props.addMessage}/>}/>
                <Route path="/news" component={News}/>
                <Route path="/music" component={Music}/>
                <Route path="/settings" component={Settings}/>
