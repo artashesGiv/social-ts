@@ -8,12 +8,13 @@ import Dialogs from './components/Dialogs/Dialogs'
 import News from './components/News/News'
 import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
-import {stateType} from './redux/state'
+import {addMessageType, addPostType, stateType, updateNewPostTextType} from './redux/state'
 
 type appPropsType = {
    state: stateType
-   addPost: (postText: string) => void
-   addMessage: (messageText: string) => void
+   addPost: addPostType
+   addMessage: addMessageType
+   updateNewPostText: updateNewPostTextType
 }
 
 const App = (props: appPropsType) => {
@@ -23,7 +24,7 @@ const App = (props: appPropsType) => {
             <Header/>
             <Navbar state={props.state.navbar}/>
             <div className="app-wrapper-content">
-               <Route path="/profile" render={() => <Profile state={props.state.profilePage} addPost={props.addPost}/>}/>
+               <Route path="/profile" render={() => <Profile state={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
                <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage} addMessage={props.addMessage}/>}/>
                <Route path="/news" component={News}/>
                <Route path="/music" component={Music}/>

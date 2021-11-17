@@ -1,6 +1,4 @@
 import {v1} from 'uuid'
-import {rerenderEntireTree} from '../render'
-
 
 // ================Типы===================
 //profile types
@@ -11,6 +9,7 @@ export type postType = {
 }
 export type profilePageType = {
    posts: Array<postType>
+   newTextPost: string
 }
 
 // dialogs types
@@ -53,6 +52,7 @@ export let state: stateType = {
          {id: v1(), post: 'My posts', like: 6},
          {id: v1(), post: 'How are you', like: 76},
       ],
+      newTextPost: '',
    },
    dialogsPage: {
       dialogs: [
@@ -77,24 +77,30 @@ export let state: stateType = {
          {name: 'Music', link: '/music'},
          {name: 'Settings', link: '/settings'},
          {name: 'Friends', link: '/friends'},
-      ]
-   }
+      ],
+   },
 }
 
 
 // ===============Функции=================
-export type addPostType = (postMessage: string) => void
-export const addPost = (postMessage: string) => {
+
+let rerenderEntireTree = () => {}
+
+// Добвление поста
+export type addPostType = () => void
+export const addPost = () => {
    const newPost: postType = {
       id: v1(),
-      post: postMessage,
+      post: state.profilePage.newTextPost,
       like: 0,
    }
    state.profilePage.posts.push(newPost)
-   rerenderEntireTree(state)
+   state.profilePage.newTextPost = ''
+   rerenderEntireTree()
 }
 
 
+// добавление сообщения
 export type addMessageType = (postMessage: string) => void
 export const addMessage = (messageText: string) => {
    const newMessage: messageType = {
@@ -102,5 +108,16 @@ export const addMessage = (messageText: string) => {
       message: messageText,
    }
    state.dialogsPage.messages.push(newMessage)
-   rerenderEntireTree(state)
+   rerenderEntireTree()
+}
+
+//изменение в textarea
+export type updateNewPostTextType = (newTextPost: string) => void
+export const updateNewPostText = (newTextPost: string) => {
+   state.profilePage.newTextPost = newTextPost
+   rerenderEntireTree()
+}
+
+export const subscribe = (observer: () => void) => {
+   rerenderEntireTree = observer                // pattern observer
 }
