@@ -1,4 +1,6 @@
 import {v1} from 'uuid'
+import {addPostAC, profileReducer, updateNewTextPostAC} from './profileReducer'
+import {addMessageAC, dialogsReducer, updateTextMessageAC} from './dialogsReducer'
 
 // ================Типы===================
 //profile types
@@ -24,6 +26,7 @@ export type messageType = {
 export type dialogsPageType = {
    dialogs: Array<dialogType>
    messages: Array<messageType>
+   newTextMessage: string
 }
 
 // navbar types
@@ -41,83 +44,74 @@ export type stateType = {
    dialogsPage: dialogsPageType
    navbar: navbarType
 }
+// store type
+export type storeType = {
+   _state: stateType
+   _onChange: () => void
 
-
-// ================State===================
-export let state: stateType = {
-   profilePage: {
-      posts: [
-         {id: v1(), post: 'Hi. how are you!', like: 15},
-         {id: v1(), post: 'Hello', like: 20},
-         {id: v1(), post: 'My posts', like: 6},
-         {id: v1(), post: 'How are you', like: 76},
-      ],
-      newTextPost: '',
+   subscribe: (observer: () => void) => void
+   getState: () => stateType
+   dispatch: (action: actionsTypes) => void
+}
+// --------------- action type --------------
+export type actionsTypes =
+   ReturnType<typeof addPostAC>
+   | ReturnType<typeof updateNewTextPostAC>
+   | ReturnType<typeof addMessageAC>
+   | ReturnType<typeof updateTextMessageAC>
+// ================Store===================
+export const store: storeType = {
+   _state: {
+      profilePage: {
+         posts: [
+            {id: v1(), post: 'Hi. how are you!', like: 15},
+            {id: v1(), post: 'Hello', like: 20},
+            {id: v1(), post: 'My posts', like: 6},
+            {id: v1(), post: 'How are you', like: 76},
+         ],
+         newTextPost: '',
+      },
+      dialogsPage: {
+         dialogs: [
+            {id: v1(), name: 'Artashes'},
+            {id: v1(), name: 'Karina'},
+            {id: v1(), name: 'Maksim'},
+            {id: v1(), name: 'Marina'},
+            {id: v1(), name: 'David'},
+         ],
+         messages: [
+            {id: v1(), message: 'Hi'},
+            {id: v1(), message: 'Hello'},
+            {id: v1(), message: 'Yo'},
+            {id: v1(), message: 'How are you'},
+         ],
+         newTextMessage: '',
+      },
+      navbar: {
+         elements: [
+            {name: 'Profile', link: '/profile'},
+            {name: 'Dialogs', link: '/dialogs'},
+            {name: 'News', link: '/news'},
+            {name: 'Music', link: '/music'},
+            {name: 'Settings', link: '/settings'},
+            {name: 'Friends', link: '/friends'},
+         ],
+      },
    },
-   dialogsPage: {
-      dialogs: [
-         {id: v1(), name: 'Artashes'},
-         {id: v1(), name: 'Karina'},
-         {id: v1(), name: 'Maksim'},
-         {id: v1(), name: 'Marina'},
-         {id: v1(), name: 'David'},
-      ],
-      messages: [
-         {id: v1(), message: 'Hi'},
-         {id: v1(), message: 'Hello'},
-         {id: v1(), message: 'Yo'},
-         {id: v1(), message: 'How are you'},
-      ],
+   _onChange() {
    },
-   navbar: {
-      elements: [
-         {name: 'Profile', link: '/profile'},
-         {name: 'Dialogs', link: '/dialogs'},
-         {name: 'News', link: '/news'},
-         {name: 'Music', link: '/music'},
-         {name: 'Settings', link: '/settings'},
-         {name: 'Friends', link: '/friends'},
-      ],
+
+   subscribe(rerenderEntireTree: () => void) {
+      this._onChange = rerenderEntireTree                // pattern observer
    },
-}
+   getState() {
+      return this._state
+   },
 
+   dispatch(action) {
+      this._state.profilePage = profileReducer(this._state.profilePage, action)
+      this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
 
-// ===============Функции=================
-
-let rerenderEntireTree = () => {}
-
-// Добвление поста
-export type addPostType = () => void
-export const addPost = () => {
-   const newPost: postType = {
-      id: v1(),
-      post: state.profilePage.newTextPost,
-      like: 0,
-   }
-   state.profilePage.posts.push(newPost)
-   state.profilePage.newTextPost = ''
-   rerenderEntireTree()
-}
-
-
-// добавление сообщения
-export type addMessageType = (postMessage: string) => void
-export const addMessage = (messageText: string) => {
-   const newMessage: messageType = {
-      id: v1(),
-      message: messageText,
-   }
-   state.dialogsPage.messages.push(newMessage)
-   rerenderEntireTree()
-}
-
-//изменение в textarea
-export type updateNewPostTextType = (newTextPost: string) => void
-export const updateNewPostText = (newTextPost: string) => {
-   state.profilePage.newTextPost = newTextPost
-   rerenderEntireTree()
-}
-
-export const subscribe = (observer: () => void) => {
-   rerenderEntireTree = observer                // pattern observer
+      this._onChange()
+   },
 }

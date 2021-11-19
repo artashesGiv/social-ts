@@ -1,13 +1,13 @@
 import React from 'react'
 import s from './MyPosts.module.scss'
 import Post from './Post/Post'
-import {addPostType, postType, updateNewPostTextType} from '../../../redux/state'
+import {actionsTypes, postType} from '../../../redux/state'
+import {addPostAC, updateNewTextPostAC} from '../../../redux/profileReducer'
 
 type postsPropsType = {
    posts: Array<postType>
-   newPostText: string
-   addPost: addPostType
-   updateNewPostText: updateNewPostTextType
+   newTextPost: string
+   dispatch: (action: actionsTypes) => void
 }
 
 const MyPosts = (props: postsPropsType) => {
@@ -18,14 +18,14 @@ const MyPosts = (props: postsPropsType) => {
 
    const addPost = () => {
       if (newPostElement.current) {
-         props.addPost()
+         props.dispatch(addPostAC())
       }
    }
 
    const onPostChange = () => {
       if (newPostElement.current) {
          let text = newPostElement.current.value
-         props.updateNewPostText(text)
+         props.dispatch(updateNewTextPostAC(text))
       }
    }
 
@@ -37,7 +37,7 @@ const MyPosts = (props: postsPropsType) => {
                <textarea
                   onChange={onPostChange}
                   ref={newPostElement}
-                  value={props.newPostText}/>
+                  value={props.newTextPost}/>
             </div>
             <div>
                <button onClick={addPost}>add</button>
