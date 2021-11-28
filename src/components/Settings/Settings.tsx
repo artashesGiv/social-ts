@@ -1,16 +1,12 @@
 import React from 'react'
 import s from './Settings.module.scss'
 
-type SettingsPropsType = {
+type SettingsPropsType = {}
 
-}
-
-const Settings = (props: SettingsPropsType) => {
+export const Settings = (props: SettingsPropsType) => {
    return (
       <div>
          Settings
       </div>
    )
 }
-
-export default Settings

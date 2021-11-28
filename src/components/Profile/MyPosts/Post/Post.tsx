@@ -7,7 +7,7 @@ type PropsPost = {
    likesCount: number
 }
 
-const Post = (props: PropsPost) => {
+export const Post = (props: PropsPost) => {
    return (
       <div className={s.item}>
          <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" alt="avatar"/>
@@ -19,5 +19,3 @@ const Post = (props: PropsPost) => {
    )
 
 }
-
-export default Post

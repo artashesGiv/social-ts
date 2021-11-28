@@ -1,16 +1,15 @@
 import React from 'react'
 import s from './Navbar.module.scss'
-import {navbarType} from '../../redux/state'
+import {navbarType} from '../../redux/store'
 import NavbarItem from './NavbarItem/NavbarItem'
 
 type navbarPropsType = {
    state: navbarType
 }
 
-const Navbar = (props: navbarPropsType) => {
-
+export const Navbar = (props: navbarPropsType) => {
    let navbarElements = props.state.elements
-      .map(el => <NavbarItem name={el.name} link={el.link}/>)
+      .map(el => <NavbarItem key={el.name} name={el.name} link={el.link}/>)
 
    return (
       <nav className={s.nav}>
@@ -18,5 +17,3 @@ const Navbar = (props: navbarPropsType) => {
       </nav>
    )
 }
-
-export default Navbar

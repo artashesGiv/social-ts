@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import s from './NavbarItem.module.scss'
-import {navbarElementType} from '../../../redux/state'
+import {navbarElementType} from '../../../redux/store'
 
 const NavbarItem = (props: navbarElementType) => {
    return (

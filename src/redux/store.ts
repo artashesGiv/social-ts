@@ -4,26 +4,26 @@ import {addMessageAC, dialogsReducer, updateTextMessageAC} from './dialogsReduce
 
 // ================Типы===================
 //profile types
-export type postType = {
+type postType = {
    id: string
    post: string
    like: number
 }
-export type profilePageType = {
+type profilePageType = {
    posts: Array<postType>
    newTextPost: string
 }
 
 // dialogs types
-export type dialogType = {
+type dialogType = {
    id: string
    name: string
 }
-export type messageType = {
+type messageType = {
    id: string
    message: string
 }
-export type dialogsPageType = {
+type dialogsPageType = {
    dialogs: Array<dialogType>
    messages: Array<messageType>
    newTextMessage: string
@@ -44,6 +44,10 @@ export type stateType = {
    dialogsPage: dialogsPageType
    navbar: navbarType
 }
+
+// dispatchType
+export type dispatchType = (action: actionsTypes) => void
+
 // store type
 export type storeType = {
    _state: stateType
@@ -51,7 +55,7 @@ export type storeType = {
 
    subscribe: (observer: () => void) => void
    getState: () => stateType
-   dispatch: (action: actionsTypes) => void
+   dispatch: dispatchType
 }
 // --------------- action type --------------
 export type actionsTypes =

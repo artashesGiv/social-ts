@@ -1,30 +1,31 @@
 import React from 'react'
 import './App.scss'
-import {BrowserRouter, Route} from 'react-router-dom'
-import Header from './components/Header/Header'
-import Navbar from './components/Navbar/Navbar'
-import Profile from './components/Profile/Profile'
-import Dialogs from './components/Dialogs/Dialogs'
-import News from './components/News/News'
-import Music from './components/Music/Music'
-import Settings from './components/Settings/Settings'
-import {storeType} from './redux/state'
+import {BrowserRouter, Redirect, Route} from 'react-router-dom'
+import {Header} from './components/Header/Header'
+import {Navbar} from './components/Navbar/Navbar'
+import {Profile} from './components/Profile/Profile'
+import {News} from './components/News/News'
+import {Music} from './components/Music/Music'
+import {Settings} from './components/Settings/Settings'
+import {Store} from '@reduxjs/toolkit'
+import {DialogsContainer} from './components/Dialogs/DialogsContainer'
 
-type appPropsType = {
-   store: storeType
+type AppPropsType = {
+   store: Store
 }
 
-const App = (props: appPropsType) => {
+export const App = (props: AppPropsType) => {
    const state = props.store.getState()
 
    return (
       <BrowserRouter>
          <div className="app-wrapper">
             <Header/>
-            <Navbar state={state.navbar}/>
+            <Navbar state={state.navBar}/>
             <div className="app-wrapper-content">
-               <Route path="/profile" render={() => <Profile state={state.profilePage} dispatch={props.store.dispatch.bind(props.store)}/>}/>
-               <Route path="/dialogs" render={() => <Dialogs state={state.dialogsPage} dispatch={props.store.dispatch.bind(props.store)}/>}/>
+               <Route path="/" exact render={() => <Redirect to="/profile"/>}/>
+               <Route path="/profile" render={() => <Profile/>}/>
+               <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                <Route path="/news" component={News}/>
                <Route path="/music" component={Music}/>
                <Route path="/settings" component={Settings}/>
@@ -33,5 +34,3 @@ const App = (props: appPropsType) => {
       </BrowserRouter>
    )
 }
-
-export default App

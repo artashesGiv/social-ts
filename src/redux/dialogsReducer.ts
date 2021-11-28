@@ -1,23 +1,58 @@
-import {actionsTypes, dialogsPageType, messageType} from './state'
+import {actionsTypes} from './store'
 import {v1} from 'uuid'
 
-export const ADD_MESSAGE = 'ADD-MESSAGE'
-export const UPDATE_TEXT_MESSAGE = 'UPDATE-TEXT-MESSAGE'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+const UPDATE_TEXT_MESSAGE = 'UPDATE-TEXT-MESSAGE'
 
-export const dialogsReducer = (state: dialogsPageType, action: actionsTypes) => {
+export type dialogType = {
+   id: string
+   name: string
+}
+export type messageType = {
+   id: string
+   message: string
+}
 
+export type initialStateDialogsType = {
+   dialogs: Array<dialogType>
+   messages: Array<messageType>
+   newTextMessage: string
+}
+
+const initialStateDialogs = {
+   dialogs: [
+      {id: v1(), name: 'Artashes'},
+      {id: v1(), name: 'Karina'},
+      {id: v1(), name: 'Maksim'},
+      {id: v1(), name: 'Marina'},
+      {id: v1(), name: 'David'},
+   ],
+   messages: [
+      {id: v1(), message: 'Hi'},
+      {id: v1(), message: 'Hello'},
+      {id: v1(), message: 'Yo'},
+      {id: v1(), message: 'How are you'},
+   ],
+   newTextMessage: '',
+}
+
+export const dialogsReducer = (state: initialStateDialogsType = initialStateDialogs, action: actionsTypes): initialStateDialogsType => {
    switch (action.type) {
       case ADD_MESSAGE:
          const newMessage: messageType = {
             id: v1(),
             message: state.newTextMessage,
          }
-         state.messages.push(newMessage)
-         state.newTextMessage = ''
-         return state
+         return {
+            ...state,
+            messages: [...state.messages, newMessage],
+            newTextMessage: '',
+         }
       case UPDATE_TEXT_MESSAGE:
-         state.newTextMessage = action.newTextMessage
-         return state
+         return {
+            ...state,
+            newTextMessage: action.newTextMessage,
+         }
       default:
          return state
    }
