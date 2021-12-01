@@ -13,7 +13,7 @@ type mapDispatchToPropsType = {
    onMessageChange: (text: string) => void
 }
 
-export type DialogsPageType = mapStateToPropsType & mapDispatchToPropsType
+export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
    return {
@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
       addMessage: () => {
          dispatch(addMessageAC())
       },
-      onMessageChange: (text: string) => {
+      onMessageChange: (text) => {
          let action = updateTextMessageAC(text)
          dispatch(action)
       },

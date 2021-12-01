@@ -1,14 +1,10 @@
 import React from 'react'
 import s from './Navbar.module.scss'
-import {navbarType} from '../../redux/store'
 import NavbarItem from './NavbarItem/NavbarItem'
+import {NavbarPropsType} from './NavbarContainer'
 
-type navbarPropsType = {
-   state: navbarType
-}
-
-export const Navbar = (props: navbarPropsType) => {
-   let navbarElements = props.state.elements
+export const Navbar = ({elements, ...props}: NavbarPropsType) => {
+   let navbarElements = elements
       .map(el => <NavbarItem key={el.name} name={el.name} link={el.link}/>)
 
    return (

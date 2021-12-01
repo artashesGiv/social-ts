@@ -1,6 +1,6 @@
 import {v1} from 'uuid'
-import {addPostAC, profileReducer, updateNewTextPostAC} from './profileReducer'
-import {addMessageAC, dialogsReducer, updateTextMessageAC} from './dialogsReducer'
+import {addPostAC, profileReducer} from './profileReducer'
+import  {dialogsReducer} from './dialogsReducer'
 
 // ================Типы===================
 //profile types
@@ -34,22 +34,22 @@ export type navbarElementType = {
    name: string
    link: string
 }
-export type navbarType = {
+type navbarType = {
    elements: Array<navbarElementType>
 }
 
 // state type
-export type stateType = {
+type stateType = {
    profilePage: profilePageType
    dialogsPage: dialogsPageType
    navbar: navbarType
 }
 
 // dispatchType
-export type dispatchType = (action: actionsTypes) => void
+type dispatchType = (action: actionsTypes) => void
 
 // store type
-export type storeType = {
+type storeType = {
    _state: stateType
    _onChange: () => void
 
@@ -58,11 +58,8 @@ export type storeType = {
    dispatch: dispatchType
 }
 // --------------- action type --------------
-export type actionsTypes =
+type actionsTypes =
    ReturnType<typeof addPostAC>
-   | ReturnType<typeof updateNewTextPostAC>
-   | ReturnType<typeof addMessageAC>
-   | ReturnType<typeof updateTextMessageAC>
 // ================Store===================
 export const store: storeType = {
    _state: {

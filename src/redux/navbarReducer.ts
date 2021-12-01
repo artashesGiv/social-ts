@@ -1,16 +1,25 @@
-import {actionsTypes, navbarType} from './store'
+import {actionsTypes} from './redux-store'
 
-let initialState = {
+export type navBarItem = {
+   name: string
+   link: string
+}
+
+export type initialStateType = {
+   elements: Array<navBarItem>
+}
+
+let initialState: initialStateType = {
    elements: [
+      {name: 'News', link: '/news'},
       {name: 'Profile', link: '/profile'},
       {name: 'Dialogs', link: '/dialogs'},
-      {name: 'News', link: '/news'},
+      {name: 'All users', link: '/users'},
       {name: 'Music', link: '/music'},
       {name: 'Settings', link: '/settings'},
-      {name: 'Friends', link: '/friends'},
    ],
 }
 
-export const navbarReducer = (state: navbarType = initialState, action: actionsTypes) => {
+export const navbarReducer = (state: initialStateType = initialState, action: actionsTypes) => {
    return state
 }

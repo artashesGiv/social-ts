@@ -1,4 +1,4 @@
-import {actionsTypes} from './store'
+import {actionsTypes} from './redux-store'
 import {v1} from 'uuid'
 
 const ADD_POST = 'ADD-POST'
@@ -14,7 +14,7 @@ export type initialStateProfileType = {
    newTextPost: string
 }
 
-let initialStateProfile = {
+let initialStateProfile: initialStateProfileType = {
    posts: [
       {id: v1(), post: 'Hi. how are you!', like: 15},
       {id: v1(), post: 'Hello', like: 20},

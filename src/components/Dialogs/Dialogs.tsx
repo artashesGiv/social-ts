@@ -2,9 +2,9 @@ import React from 'react'
 import s from './Dialogs.module.scss'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
-import {DialogsPageType} from './DialogsContainer'
+import {DialogsPropsType} from './DialogsContainer'
 
-export const Dialogs = (props: DialogsPageType) => {
+export const Dialogs = (props: DialogsPropsType) => {
 
    let dialogsElements = props.dialogsPage.dialogs
       .map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)

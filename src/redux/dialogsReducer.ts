@@ -1,4 +1,4 @@
-import {actionsTypes} from './store'
+import {actionsTypes} from './redux-store'
 import {v1} from 'uuid'
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
@@ -19,9 +19,9 @@ export type initialStateDialogsType = {
    newTextMessage: string
 }
 
-const initialStateDialogs = {
+const initialStateDialogs: initialStateDialogsType = {
    dialogs: [
-      {id: v1(), name: 'Artashes'},
+      {id: v1(), name: 'Anastasia'},
       {id: v1(), name: 'Karina'},
       {id: v1(), name: 'Maksim'},
       {id: v1(), name: 'Marina'},
