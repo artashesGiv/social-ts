@@ -61,7 +61,7 @@ type storeType = {
 type actionsTypes =
    ReturnType<typeof addPostAC>
 // ================Store===================
-export const store: storeType = {
+const store: storeType = {
    _state: {
       profilePage: {
          posts: [
