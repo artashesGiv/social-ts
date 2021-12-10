@@ -2,7 +2,7 @@ import {combineReducers, createStore} from '@reduxjs/toolkit'
 import {addPostAC, profileReducer, updateNewTextPostAC} from './profileReducer'
 import {addMessageAC, dialogsReducer, updateTextMessageAC} from './dialogsReducer'
 import {navbarReducer} from './navbarReducer'
-import {followAC, setUsersAC, unfollowAC, usersReducer} from './usersReducer'
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, usersReducer} from './usersReducer'
 
 export const rootReducer = combineReducers({
    profilePage: profileReducer,
@@ -23,4 +23,6 @@ export type actionsTypes =
    | ReturnType<typeof followAC>
    | ReturnType<typeof unfollowAC>
    | ReturnType<typeof setUsersAC>
+   | ReturnType<typeof setCurrentPageAC>
+   | ReturnType<typeof setTotalUsersCountAC>
 
