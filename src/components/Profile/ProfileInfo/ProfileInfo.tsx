@@ -11,6 +11,8 @@ export const ProfileInfo = ({profile}: ProfileInfoPropsType) => {
    if (!profile) {
       return <Preloader/>
    } else {
+      const {lookingForAJob, fullName, photos, contacts} = profile
+      const contactsLink = Object.values(contacts)
       return (
          <div>
             <div>
@@ -19,8 +21,19 @@ export const ProfileInfo = ({profile}: ProfileInfoPropsType) => {
                   alt="bg"/>
             </div>
             <div className={s.descriptionBlock}>
-               <img src={profile.photos.large} alt={'avatar'}/>
-               ava + description
+               <div><h2>{fullName}</h2></div>
+               <div className={s.personalBlock}>
+                  <div><img src={photos.large} alt={'avatar'}/></div>
+                  <div>
+                     <h3>Контакты</h3>
+                     <ul>
+                        {contactsLink.map(c => {
+                           return c && <li>{c}</li>
+                        })}
+                     </ul>
+                     <div>{lookingForAJob ? 'В поиске работы' : 'Уже работаю'}</div>
+                  </div>
+               </div>
             </div>
          </div>
       )
