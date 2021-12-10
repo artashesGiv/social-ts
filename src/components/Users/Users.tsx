@@ -1,14 +1,15 @@
 import React from 'react'
 import s from './Users.module.scss'
 import userPhoto from '../../assets/images/80x80.png'
-import { UsersPropsType } from './UsersContainer'
+import {UsersPropsType} from './UsersContainer'
+import { NavLink } from 'react-router-dom'
 
 type UsersPropsTypeFunc = {
    usersProps: UsersPropsType
    onPageChanged: (pageNumber: number) => void
 }
 
-export const Users = ({usersProps, onPageChanged, ...props}: UsersPropsTypeFunc) => {
+export const Users = ({usersProps, onPageChanged}: UsersPropsTypeFunc) => {
 
    let pagesCount = Math.ceil(usersProps.usersPage.totalUsersCount / usersProps.usersPage.pageSize)
    let pages = []
@@ -28,7 +29,9 @@ export const Users = ({usersProps, onPageChanged, ...props}: UsersPropsTypeFunc)
                   <div key={u.id}>
                      <span>
                         <div>
-                           <img src={u.photos.small !== null ? u.photos.small : userPhoto} alt={'avatar'}/>
+                           <NavLink to={'/profile/' + u.id}>
+                              <img src={u.photos.small !== null ? u.photos.small : userPhoto} alt={'avatar'}/>
+                           </NavLink>
                         </div>
                         <div>
                            {

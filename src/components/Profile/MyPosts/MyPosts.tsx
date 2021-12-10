@@ -1,20 +1,28 @@
 import React from 'react'
 import s from './MyPosts.module.scss'
+import {postType} from '../../../redux/profileReducer'
 import {Post} from './Post/Post'
-import {ProfilePostsType} from './MyPostsContainer'
 
-export const MyPosts = (props: ProfilePostsType) => {
-   let postsElement = props.profilePage.posts.map(p => <Post key={p.id} id={p.id} message={p.post} likesCount={p.like}/>)
+type MyPostsPropsType = {
+   posts: postType[]
+   newTextPost: string
+   addPost: () => void
+   updateTextPost: (text: string) => void
+}
+
+export const MyPosts = ({posts, updateTextPost, newTextPost, addPost}: MyPostsPropsType) => {
+
+   let postsElement = posts.map(p => <Post key={p.id} id={p.id} message={p.post} likesCount={p.like}/>)
    let newPostElement = React.createRef<HTMLTextAreaElement>()
 
    const onAddPost = () => {
-      props.addPost()
+      addPost()
    }
 
    const onPostChange = () => {
       if (newPostElement.current) {
          let text = newPostElement.current.value
-         props.updateTextPost(text)
+         updateTextPost(text)
       }
    }
 
@@ -26,7 +34,7 @@ export const MyPosts = (props: ProfilePostsType) => {
                <textarea
                   onChange={onPostChange}
                   ref={newPostElement}
-                  value={props.profilePage.newTextPost}
+                  value={newTextPost}
                />
             </div>
             <div>

@@ -17,5 +17,4 @@ export const Post = (props: PropsPost) => {
          </div>
       </div>
    )
-
 }

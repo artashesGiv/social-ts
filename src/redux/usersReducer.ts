@@ -3,15 +3,15 @@
 //    country: string
 // }
 
-export type photoType = {
-   small: any
-   large: any
+type photosType = {
+   small: string
+   large: string
 }
 
 export type usersType = {
    name: string
    id: number
-   photos: photoType
+   photos: photosType
    status: string
    followed: boolean
 }
