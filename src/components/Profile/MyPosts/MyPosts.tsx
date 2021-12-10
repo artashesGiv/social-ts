@@ -14,7 +14,7 @@ export const MyPosts = (props: ProfilePostsType) => {
    const onPostChange = () => {
       if (newPostElement.current) {
          let text = newPostElement.current.value
-         props.onPostChange(text)
+         props.updateTextPost(text)
       }
    }
 

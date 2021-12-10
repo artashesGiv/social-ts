@@ -1,5 +1,3 @@
-import {actionsTypes} from './redux-store'
-
 export type navBarItem = {
    name: string
    link: string
@@ -23,3 +21,5 @@ let initialState: initialStateType = {
 export const navbarReducer = (state: initialStateType = initialState, action: actionsTypes) => {
    return state
 }
+
+type actionsTypes = {}

@@ -20,7 +20,7 @@ export const Dialogs = (props: DialogsPropsType) => {
    const onMessageChange = () => {
       if (newMessageElement.current) {
          let text = newMessageElement.current.value
-         props.onMessageChange(text)
+         props.updateTextMessage(text)
       }
    }
 

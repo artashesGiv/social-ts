@@ -1,5 +1,3 @@
-import {actionsTypes} from './redux-store'
-
 // export type locationType = {
 //    city: string
 //    country: string
@@ -31,7 +29,7 @@ const initialStateUsers: initialStateUsersType = {
    pageSize: 5,
    totalUsersCount: 20,
    currentPage: 1,
-   isFetching: false
+   isFetching: false,
 }
 
 export const usersReducer = (state: initialStateUsersType = initialStateUsers, action: actionsTypes): initialStateUsersType => {
@@ -69,9 +67,16 @@ export const usersReducer = (state: initialStateUsersType = initialStateUsers, a
    }
 }
 
-export const followAC = (userId: number) => ({type: 'FOLLOW', userId} as const)
-export const unfollowAC = (userId: number) => ({type: 'UNFOLLOW', userId} as const)
-export const setUsersAC = (users: Array<usersType>) => ({type: 'SET-USERS', users} as const)
-export const setCurrentPageAC = (currenPage: number) => ({type: 'SET-CURRENT-PAGE', currenPage} as const)
-export const setTotalUsersCountAC = (totalUsers: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalUsers} as const)
-export const toggleIsFetchingAC = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
+type actionsTypes = ReturnType<typeof follow>
+   | ReturnType<typeof unfollow>
+   | ReturnType<typeof setUsers>
+   | ReturnType<typeof setCurrentPage>
+   | ReturnType<typeof setTotalUsersCount>
+   | ReturnType < typeof toggleIsFetching>
+
+export const follow = (userId: number) => ({type: 'FOLLOW', userId} as const)
+export const unfollow = (userId: number) => ({type: 'UNFOLLOW', userId} as const)
+export const setUsers = (users: Array<usersType>) => ({type: 'SET-USERS', users} as const)
+export const setCurrentPage = (currenPage: number) => ({type: 'SET-CURRENT-PAGE', currenPage} as const)
+export const setTotalUsersCount = (totalUsers: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalUsers} as const)
+export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)

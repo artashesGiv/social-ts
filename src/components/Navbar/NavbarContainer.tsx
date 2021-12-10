@@ -1,8 +1,6 @@
-import React from 'react'
 import {connect} from 'react-redux'
 import {Navbar} from './Navbar'
 import {AppStateType} from '../../redux/redux-store'
-import {Dispatch} from '@reduxjs/toolkit'
 import {navBarItem} from '../../redux/navbarReducer'
 
 type mapSateToPropsType = {
@@ -21,10 +19,4 @@ const mapSateToProps = (state: AppStateType): mapSateToPropsType => {
    }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-   return {
-
-   }
-}
-
-export const NavbarContainer = connect(mapSateToProps, mapDispatchToProps)(Navbar)
+export const NavbarContainer = connect(mapSateToProps, {})(Navbar)

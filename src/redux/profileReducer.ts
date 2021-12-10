@@ -1,8 +1,4 @@
-import {actionsTypes} from './redux-store'
 import {v1} from 'uuid'
-
-const ADD_POST = 'ADD-POST'
-const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST'
 
 export type postType = {
    id: string
@@ -26,7 +22,7 @@ let initialStateProfile: initialStateProfileType = {
 
 export const profileReducer = (state: initialStateProfileType = initialStateProfile, action: actionsTypes): initialStateProfileType => {
    switch (action.type) {
-      case ADD_POST:
+      case 'ADD-POST':
          const newPost: postType = {
             id: v1(),
             post: state.newTextPost,
@@ -37,7 +33,7 @@ export const profileReducer = (state: initialStateProfileType = initialStateProf
             posts: [newPost, ...state.posts],
             newTextPost: '',
          }
-      case UPDATE_TEXT_POST:
+      case 'UPDATE-TEXT-POST':
          return {
             ...state,
             newTextPost: action.newTextPost
@@ -47,9 +43,12 @@ export const profileReducer = (state: initialStateProfileType = initialStateProf
    }
 }
 
+type actionsTypes =
+   ReturnType<typeof addPost>
+   | ReturnType<typeof updateTextPost>
 
-export const addPostAC = () => ({type: ADD_POST} as const)
-export const updateNewTextPostAC = (newTextPost: string) => ({
-   type: UPDATE_TEXT_POST,
+export const addPost = () => ({type: 'ADD-POST'} as const)
+export const updateTextPost = (newTextPost: string) => ({
+   type: 'UPDATE-TEXT-POST',
    newTextPost,
 } as const)
