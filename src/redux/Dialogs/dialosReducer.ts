@@ -1,19 +1,5 @@
 import {v1} from 'uuid'
-
-export type dialogType = {
-   id: string
-   name: string
-}
-export type messageType = {
-   id: string
-   message: string
-}
-
-export type initialStateDialogsType = {
-   dialogs: Array<dialogType>
-   messages: Array<messageType>
-   newTextMessage: string
-}
+import {initialStateDialogsType, messageType} from './types'
 
 const initialStateDialogs: initialStateDialogsType = {
    dialogs: [
@@ -32,7 +18,7 @@ const initialStateDialogs: initialStateDialogsType = {
    newTextMessage: '',
 }
 
-export const dialogsReducer = (state: initialStateDialogsType = initialStateDialogs, action: actionsTypes): initialStateDialogsType => {
+export const dialosReducer = (state: initialStateDialogsType = initialStateDialogs, action: actionsTypes): initialStateDialogsType => {
    switch (action.type) {
       case 'ADD-MESSAGE':
          const newMessage: messageType = {

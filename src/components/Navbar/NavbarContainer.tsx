@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import {Navbar} from './Navbar'
 import {AppStateType} from '../../redux/redux-store'
-import {navBarItem} from '../../redux/navbarReducer'
+import {navBarItem} from '../../redux/Navbar/types'
 
 type mapSateToPropsType = {
    elements: Array<navBarItem>

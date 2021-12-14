@@ -1,13 +1,6 @@
-export type navBarItem = {
-   name: string
-   link: string
-}
+import {initialStateType} from './types'
 
-export type initialStateType = {
-   elements: Array<navBarItem>
-}
-
-let initialState: initialStateType = {
+const initialState: initialStateType = {
    elements: [
       {name: 'News', link: '/news'},
       {name: 'Profile', link: '/profile'},

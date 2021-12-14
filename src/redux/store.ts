@@ -1,5 +1,5 @@
 
-import {addPost} from './profileReducer'
+import {addPost} from './Propfile/profileReducer'
 
 // ================Типы===================
 //profile types
@@ -109,8 +109,8 @@ type actionsTypes =
 //    },
 //
 //    dispatch(action) {
-//       this._state.profilePage = profileReducer(this._state.profilePage, action)
-//       this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+//       this._state.profilePage = dialosReducer(this._state.profilePage, action)
+//       this._state.dialogsPage = dialosReducer(this._state.dialogsPage, action)
 //
 //       this._onChange()
 //    },

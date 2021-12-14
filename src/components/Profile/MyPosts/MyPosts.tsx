@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './MyPosts.module.scss'
-import {postType} from '../../../redux/profileReducer'
 import {Post} from './Post/Post'
+import {postType} from '../../../redux/Propfile/types'
 
 type MyPostsPropsType = {
    posts: postType[]

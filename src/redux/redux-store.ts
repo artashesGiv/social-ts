@@ -1,12 +1,12 @@
 import {combineReducers, createStore} from '@reduxjs/toolkit'
-import {profileReducer} from './profileReducer'
-import {dialogsReducer} from './dialogsReducer'
-import {navbarReducer} from './navbarReducer'
+import {navbarReducer} from './Navbar/navbarReducer'
 import {usersReducer} from './usersReducer'
+import {profileReducer} from './Propfile/profileReducer'
+import {dialosReducer} from './Dialogs/dialosReducer'
 
 export const rootReducer = combineReducers({
    profilePage: profileReducer,
-   dialogsPage: dialogsReducer,
+   dialogsPage: dialosReducer,
    navBar: navbarReducer,
    usersPage: usersReducer,
 })

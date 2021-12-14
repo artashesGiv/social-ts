@@ -3,7 +3,7 @@ import s from './Navbar.module.scss'
 import NavbarItem from './NavbarItem/NavbarItem'
 import {NavbarPropsType} from './NavbarContainer'
 
-export const Navbar = ({elements, ...props}: NavbarPropsType) => {
+export const Navbar = ({elements}: NavbarPropsType) => {
    let navbarElements = elements
       .map(el => <NavbarItem key={el.name} name={el.name} link={el.link}/>)
 
