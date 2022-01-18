@@ -1,7 +1,7 @@
-import {addMessage, updateTextMessage} from '../../redux/Dialogs/dialosReducer'
+import {addMessage, updateTextMessage} from '../../redux/Dialogs/dialogsReducer'
 import {Dialogs} from './Dialogs'
 import {connect} from 'react-redux'
-import {AppStateType} from '../../redux/redux-store'
+import {AppStateType} from '../../redux/reduxStore'
 import {initialStateDialogsType} from '../../redux/Dialogs/types'
 
 type mapStateToPropsType = {

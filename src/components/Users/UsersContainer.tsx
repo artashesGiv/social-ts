@@ -1,23 +1,24 @@
 import {connect} from 'react-redux'
 import {
    follow,
-   initialStateUsersType,
    setCurrentPage, setTotalUsersCount,
    setUsers, toggleIsFetching,
    unfollow,
-   usersType,
-} from '../../redux/usersReducer'
-import {AppStateType} from '../../redux/redux-store'
+} from '../../redux/Users/usersReducer'
+import {AppStateType} from '../../redux/reduxStore'
 import React from 'react'
 import axios from 'axios'
 import {Users} from './Users'
 import {Preloader} from '../common/Preloader/Preloader'
+import {initialStateUsersType, usersType} from '../../redux/Users/types'
 
 class UsersContainer extends React.Component<UsersPropsType, initialStateUsersType> {
 
    componentDidMount() {
       this.props.toggleIsFetching(true)
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`).then(response => {
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`, {
+         withCredentials: true,
+      }).then(response => {
          this.props.toggleIsFetching(false)
          this.props.setUsers(response.data.items)
          this.props.setTotalUsersCount(response.data.totalCount)

@@ -5,7 +5,7 @@ type NewsPropsType = {}
 
 export const News = (props: NewsPropsType) => {
    return (
-      <div>
+      <div className={s.wrapper}>
          News
       </div>
    )

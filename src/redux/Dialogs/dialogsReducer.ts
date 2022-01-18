@@ -18,7 +18,7 @@ const initialStateDialogs: initialStateDialogsType = {
    newTextMessage: '',
 }
 
-export const dialosReducer = (state: initialStateDialogsType = initialStateDialogs, action: actionsTypes): initialStateDialogsType => {
+export const dialogsReducer = (state: initialStateDialogsType = initialStateDialogs, action: actionsTypes): initialStateDialogsType => {
    switch (action.type) {
       case 'ADD-MESSAGE':
          const newMessage: messageType = {

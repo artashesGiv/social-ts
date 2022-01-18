@@ -3,6 +3,7 @@ export type dialogType = {
    id: string
    name: string
 }
+
 export type messageType = {
    id: string
    message: string

@@ -5,7 +5,7 @@ type SettingsPropsType = {}
 
 export const Settings = (props: SettingsPropsType) => {
    return (
-      <div>
+      <div className={s.wrapper}>
          Settings
       </div>
    )

@@ -23,14 +23,17 @@ export const ProfileInfo = ({profile}: ProfileInfoPropsType) => {
             <div className={s.descriptionBlock}>
                <div><h2>{fullName}</h2></div>
                <div className={s.personalBlock}>
-                  <div>{photos.large ? <img src={photos.large} alt={'avatar'}/> : <img src="https://dummyimage.com/200x300&text=avatar" alt={'avatar'}/>}</div>
+                  <div>{photos.large ? <img src={photos.large} alt={'avatar'}/> :
+                     <img src="https://dummyimage.com/200x300&text=avatar" alt={'avatar'}/>}</div>
                   <div>
                      <h3>Контакты</h3>
                      <ul>
-                        {contactsLink.map(c => {
-                           return c && <li>
-                             <a href={c}>{c}</a>
-                           </li>
+                        {contactsLink.map((c, id) => {
+                           return c && (
+                              <li key={id}>
+                                 <a href={c}>{c}</a>
+                              </li>
+                           )
                         })}
                      </ul>
                      <div>{lookingForAJob ? lookingForAJobDescription : ''}</div>

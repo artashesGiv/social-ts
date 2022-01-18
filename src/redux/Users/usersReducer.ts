@@ -1,28 +1,4 @@
-// export type locationType = {
-//    city: string
-//    country: string
-// }
-
-type photosType = {
-   small: string
-   large: string
-}
-
-export type usersType = {
-   name: string
-   id: number
-   photos: photosType
-   status: string
-   followed: boolean
-}
-
-export type initialStateUsersType = {
-   users: Array<usersType>
-   pageSize: number
-   totalUsersCount: number
-   currentPage: number
-   isFetching: boolean
-}
+import {initialStateUsersType, usersType} from './types'
 
 const initialStateUsers: initialStateUsersType = {
    users: [],
@@ -72,7 +48,7 @@ type actionsTypes = ReturnType<typeof follow>
    | ReturnType<typeof setUsers>
    | ReturnType<typeof setCurrentPage>
    | ReturnType<typeof setTotalUsersCount>
-   | ReturnType < typeof toggleIsFetching>
+   | ReturnType<typeof toggleIsFetching>
 
 export const follow = (userId: number) => ({type: 'FOLLOW', userId} as const)
 export const unfollow = (userId: number) => ({type: 'UNFOLLOW', userId} as const)
