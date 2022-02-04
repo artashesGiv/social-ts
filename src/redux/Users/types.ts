@@ -1,7 +1,3 @@
-// export type locationType = {
-//    city: string
-//    country: string
-// }
 
 type photosType = {
    small: string
@@ -22,5 +18,6 @@ export type initialStateUsersType = {
    totalUsersCount: number
    currentPage: number
    isFetching: boolean
+   followingInProgress: number[]
 }
 

@@ -1,5 +1,6 @@
 import {v1} from 'uuid'
 import {initialStateProfileType, postType, profileType} from './types'
+import {profileAPI} from '../../api/api'
 
 const initialStateProfile: initialStateProfileType = {
    profile: {
@@ -69,7 +70,16 @@ export const updateTextPost = (newTextPost: string) => ({
    type: 'UPDATE-TEXT-POST',
    newTextPost,
 } as const)
+
 export const setUserProfile = (profile: profileType) => ({
    type: 'SET-USER-PROFILE',
    profile,
 } as const)
+
+export const getUserProfile = (userId: string) => {
+   return (dispatch: any) => {
+      profileAPI.setUserProfile(userId).then(data => {
+         dispatch(setUserProfile(data))
+      })
+   }
+}
