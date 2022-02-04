@@ -1,5 +1,6 @@
 import {initialStateAuthType} from './types'
 import {authAPI} from '../../api/api'
+import {Dispatch} from 'redux'
 
 const initialState: initialStateAuthType = {
    userId: null,
@@ -8,7 +9,7 @@ const initialState: initialStateAuthType = {
    isAuth: false
 }
 
-export const authReducer = (state: initialStateAuthType = initialState, action: actionType): initialStateAuthType => {
+export const authReducer = (state: initialStateAuthType = initialState, action: actionTypes): initialStateAuthType => {
    switch (action.type) {
       case 'SET-USER-DATA':
          return {
@@ -22,7 +23,7 @@ export const authReducer = (state: initialStateAuthType = initialState, action: 
    }
 }
 
-type actionType = ReturnType<typeof setAuthUserData>
+type actionTypes = ReturnType<typeof setAuthUserData>
 
 export const setAuthUserData = (userId: number, email: string, login: string) => ({
    type: 'SET-USER-DATA',
@@ -34,7 +35,7 @@ export const setAuthUserData = (userId: number, email: string, login: string) =>
 } as const)
 
 export const authMe = () => {
-   return (dispatch: any) => {
+   return (dispatch: Dispatch<actionTypes>) => {
       authAPI.authMe().then(data => {
          if (data.resultCode === 0) {
             const {id, email, login} = data.data

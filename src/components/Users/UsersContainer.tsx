@@ -32,8 +32,8 @@ type mapSateToPropsType = {
 
 type mapDispatchToPropsType = {
    getUsers: (currentPage: number, pageSize: number) => any // fixed any
-   followUser: (userId: number) => any // fixed any
-   unfollowUser: (userId: number) => any // fixed any
+   followUser: (userId: number) => void // fixed any
+   unfollowUser: (userId: number) => void // fixed any
 }
 
 export type UsersPropsType = mapSateToPropsType & mapDispatchToPropsType

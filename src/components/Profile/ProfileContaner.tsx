@@ -27,7 +27,7 @@ type mapSateToPropsType = {
 type mapDispatchToPropsType = {
    addPost: () => void
    updateTextPost: (text: string) => void
-   getUserProfile: (userId: string) => any
+   getUserProfile: (userId: string) => void
 }
 
 type routParams = {

@@ -1,5 +1,6 @@
 import {initialStateUsersType, usersType} from './types'
 import {usersAPI} from '../../api/api'
+import {Dispatch} from 'redux'
 
 const initialStateUsers: initialStateUsersType = {
    users: [],
@@ -101,7 +102,7 @@ export const followUser = (userId: number) => {
 
 
 export const unfollowUser = (userId: number) => {
-   return (dispatch: any) => {
+   return (dispatch: Dispatch<actionsTypes>) => {
       dispatch(toggleIsFetchingProgress(true, userId))
       usersAPI.unfollowUser(userId)
          .then(data => {
