@@ -79,8 +79,8 @@ export const setUserProfile = (profile: profileType) => ({
 
 export const getUserProfile = (userId: string) => {
    return (dispatch: Dispatch<actionsTypes>) => {
-      profileAPI.setUserProfile(userId).then(data => {
-         dispatch(setUserProfile(data))
+      profileAPI.getProfile(userId).then(response => {
+         dispatch(setUserProfile(response.data))
       })
    }
 }

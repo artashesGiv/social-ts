@@ -11,17 +11,27 @@ type UsersPropsTypeFunc = {
 
 export const Users = ({usersProps, onPageChanged}: UsersPropsTypeFunc) => {
 
-   let pagesCount = Math.ceil(usersProps.usersPage.totalUsersCount / usersProps.usersPage.pageSize)
-   let pages = Array.from(Array(pagesCount).keys()).map(x => ++x)
+   const pagesCount = Math.ceil(usersProps.usersPage.totalUsersCount / usersProps.usersPage.pageSize)
+   const pages = Array.from(Array(pagesCount).keys()).map(x => ++x)
+
+
+   const pagesNumbersForRender =
+      pages.map(p => {
+         const currentPageClassName = usersProps.usersPage.currentPage === p ? s.selectedPage : ''
+         const pagesNumbersClassName = `${currentPageClassName} ${s.pagesNumbers}`
+
+         return (
+            <span key={p}
+                  onClick={() => onPageChanged(p)}
+                  className={pagesNumbersClassName}>{p + ' '}
+            </span>
+         )
+      })
 
    return (
       <div className={s.users}>
          <div>
-            {pages.map(p =>
-               <span key={p}
-                     onClick={() => onPageChanged(p)}
-                     className={usersProps.usersPage.currentPage === p ? s.selectedPage : ''}>{p + ' '}
-               </span>)}
+            {pagesNumbersForRender}
          </div>
          {
             usersProps.usersPage.users.map(u => {
