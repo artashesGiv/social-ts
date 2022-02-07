@@ -2,12 +2,15 @@ import React from 'react'
 import s from './ProfileInfo.module.scss'
 import {Preloader} from '../../common/Preloader/Preloader'
 import {profileType} from '../../../redux/Propfile/types'
+import {ProfileStatus} from './ProfileStatus'
 
 type ProfileInfoPropsType = {
    profile: profileType
+   status: string
+   updateStatus: (status: string) => void
 }
 
-export const ProfileInfo = ({profile}: ProfileInfoPropsType) => {
+export const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoPropsType) => {
    if (!profile) {
       return <Preloader/>
    } else {
@@ -15,17 +18,18 @@ export const ProfileInfo = ({profile}: ProfileInfoPropsType) => {
       const contactsLink = Object.values(contacts)
       return (
          <div>
-            <div>
-               <img
-                  src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
-                  alt="bg"/>
-            </div>
+            {/*<div>*/}
+            {/*   <img*/}
+            {/*      src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"*/}
+            {/*      alt="bg"/>*/}
+            {/*</div>*/}
             <div className={s.descriptionBlock}>
                <div><h2>{fullName}</h2></div>
                <div className={s.personalBlock}>
                   <div>{photos.large ? <img src={photos.large} alt={'avatar'}/> :
                      <img src="https://dummyimage.com/200x300&text=avatar" alt={'avatar'}/>}</div>
                   <div>
+                     <ProfileStatus status={status} updateStatus={updateStatus} />
                      <h3>Контакты</h3>
                      <ul>
                         {contactsLink.map((c, id) => {

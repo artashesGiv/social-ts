@@ -32,6 +32,7 @@ const initialStateProfile: initialStateProfileType = {
       {id: v1(), post: 'How are you', like: 76},
    ],
    newTextPost: '',
+   status: '',
 }
 
 export const profileReducer = (state: initialStateProfileType = initialStateProfile, action: actionsTypes): initialStateProfileType => {
@@ -56,6 +57,11 @@ export const profileReducer = (state: initialStateProfileType = initialStateProf
          return {
             ...state, profile: action.profile,
          }
+      case 'SET-USER-STATUS':
+         return {
+            ...state,
+            status: action.status
+         }
       default:
          return state
    }
@@ -65,6 +71,7 @@ type actionsTypes =
    ReturnType<typeof addPost>
    | ReturnType<typeof updateTextPost>
    | ReturnType<typeof setUserProfile>
+   | ReturnType<typeof setUserStatus>
 
 export const addPost = () => ({type: 'ADD-POST'} as const)
 export const updateTextPost = (newTextPost: string) => ({
@@ -77,10 +84,33 @@ export const setUserProfile = (profile: profileType) => ({
    profile,
 } as const)
 
+export const setUserStatus = (status: string) => ({
+   type: 'SET-USER-STATUS',
+   status,
+} as const)
+
 export const getUserProfile = (userId: string) => {
    return (dispatch: Dispatch<actionsTypes>) => {
       profileAPI.getProfile(userId).then(response => {
          dispatch(setUserProfile(response.data))
+      })
+   }
+}
+
+export const getUserStatus = (userId: string) => {
+   return (dispatch: Dispatch<actionsTypes>) => {
+      profileAPI.getStatus(userId).then(response => {
+         dispatch(setUserStatus(response.data))
+      })
+   }
+}
+
+export const updateUserStatus = (status: string) => {
+   return (dispatch: Dispatch<actionsTypes>) => {
+      profileAPI.updateStatus(status).then(response => {
+         if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(status))
+         }
       })
    }
 }
