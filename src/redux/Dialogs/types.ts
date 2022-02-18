@@ -12,6 +12,5 @@ export type messageType = {
 export type initialStateDialogsType = {
    dialogs: Array<dialogType>
    messages: Array<messageType>
-   newTextMessage: string
 }
 

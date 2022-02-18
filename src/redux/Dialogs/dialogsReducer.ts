@@ -15,7 +15,6 @@ const initialStateDialogs: initialStateDialogsType = {
       {id: v1(), message: 'Yo'},
       {id: v1(), message: 'How are you'},
    ],
-   newTextMessage: '',
 }
 
 export const dialogsReducer = (state: initialStateDialogsType = initialStateDialogs, action: actionsTypes): initialStateDialogsType => {
@@ -23,18 +22,13 @@ export const dialogsReducer = (state: initialStateDialogsType = initialStateDial
       case 'ADD-MESSAGE':
          const newMessage: messageType = {
             id: v1(),
-            message: state.newTextMessage,
+            message: action.textMessage,
          }
          return {
             ...state,
             messages: [...state.messages, newMessage],
-            newTextMessage: '',
          }
-      case 'UPDATE-TEXT-MESSAGE':
-         return {
-            ...state,
-            newTextMessage: action.newTextMessage,
-         }
+
       default:
          return state
    }
@@ -42,10 +36,5 @@ export const dialogsReducer = (state: initialStateDialogsType = initialStateDial
 
 type actionsTypes =
    ReturnType<typeof addMessage>
-   | ReturnType<typeof updateTextMessage>
 
-export const addMessage = () => ({type: 'ADD-MESSAGE'} as const)
-export const updateTextMessage = (newTextMessage: string) => ({
-   type: 'UPDATE-TEXT-MESSAGE',
-   newTextMessage,
-} as const)
+export const addMessage = (textMessage: string) => ({type: 'ADD-MESSAGE', textMessage} as const)

@@ -6,7 +6,6 @@ import {
    addPost,
    getUserProfile,
    getUserStatus,
-   updateTextPost,
    updateUserStatus,
 } from '../../redux/Propfile/profileReducer'
 import {initialStateProfileType} from '../../redux/Propfile/types'
@@ -34,8 +33,7 @@ type mapSateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-   addPost: () => void
-   updateTextPost: (text: string) => void
+   addPost: (postText: string) => void
    getUserProfile: (userId: string) => void
    getUserStatus: (userId: string) => void
    updateUserStatus: (status: string) => void
@@ -49,12 +47,12 @@ export type ProfilePropsType = mapSateToPropsType & mapDispatchToPropsType & Rou
 
 const mapSateToProps = (state: AppStateType): mapSateToPropsType => {
    return {
-      profilePage: state.profilePage
+      profilePage: state.profilePage,
    }
 }
 
 export default compose<ComponentType>(
-   connect(mapSateToProps, {addPost, updateTextPost, getUserProfile, getUserStatus, updateUserStatus}),
+   connect(mapSateToProps, {addPost, getUserProfile, getUserStatus, updateUserStatus}),
    withRouter,
    // withAuthRedirect,
 )(ProfileContainer)

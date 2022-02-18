@@ -3,14 +3,12 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo'
 import {ProfilePropsType} from './ProfileContaner'
 import {MyPosts} from './MyPosts/MyPosts'
 
-export const Profile = ({profilePage, updateTextPost, addPost, updateUserStatus}: ProfilePropsType) => {
+export const Profile = ({profilePage, addPost, updateUserStatus}: ProfilePropsType) => {
 
    return (
       <div>
          <ProfileInfo profile={profilePage.profile} status={profilePage.status} updateStatus={updateUserStatus}/>
-         <MyPosts posts={profilePage.posts} newTextPost={profilePage.newTextPost} updateTextPost={updateTextPost}
-                  addPost={addPost}
-         />
+         <MyPosts posts={profilePage.posts} addPost={addPost}/>
       </div>
    )
 }

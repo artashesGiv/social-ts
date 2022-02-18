@@ -29,6 +29,5 @@ export type postType = {
 export type initialStateProfileType = {
    profile: profileType
    posts: postType[]
-   newTextPost: string
    status: string
 }

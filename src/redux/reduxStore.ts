@@ -5,6 +5,7 @@ import {profileReducer} from './Propfile/profileReducer'
 import {dialogsReducer} from './Dialogs/dialogsReducer'
 import {authReducer} from './Auth/authReduser'
 import thunkMiddleware from 'redux-thunk'
+import {reducer as formReducer} from 'redux-form'
 
 export const rootReducer = combineReducers({
    profilePage: profileReducer,
@@ -12,6 +13,7 @@ export const rootReducer = combineReducers({
    navBar: navbarReducer,
    usersPage: usersReducer,
    auth: authReducer,
+   form: formReducer,
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>
