@@ -6,7 +6,7 @@ const initialState: initialStateAuthType = {
    userId: null,
    email: null,
    login: null,
-   isAuth: false
+   isAuth: false,
 }
 
 export const authReducer = (state: initialStateAuthType = initialState, action: actionTypes): initialStateAuthType => {
@@ -14,8 +14,7 @@ export const authReducer = (state: initialStateAuthType = initialState, action: 
       case 'SET-USER-DATA':
          return {
             ...state,
-            ...action.data,
-            isAuth: true
+            ...action.payload,
          }
       default: {
          return state
@@ -25,22 +24,38 @@ export const authReducer = (state: initialStateAuthType = initialState, action: 
 
 type actionTypes = ReturnType<typeof setAuthUserData>
 
-export const setAuthUserData = (userId: number, email: string, login: string) => ({
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
    type: 'SET-USER-DATA',
-   data: {
+   payload: {
       userId,
       email,
       login,
+      isAuth,
    },
 } as const)
 
-export const authMe = () => {
-   return (dispatch: Dispatch<actionTypes>) => {
-      authAPI.authMe().then(response => {
-         if (response.data.resultCode === 0) {
-            const {id, email, login} = response.data.data
-            dispatch(setAuthUserData(id, email, login))
-         }
-      })
-   }
+
+export const authMe = () => (dispatch: Dispatch<actionTypes>) => {
+   authAPI.authMe().then(res => {
+      if (res.data.resultCode === 0) {
+         const {id, email, login} = res.data.data
+         dispatch(setAuthUserData(id, email, login, true))
+      }
+   })
+}
+
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<actionTypes>) => {
+   authAPI.login(email, password, rememberMe).then(res => {
+      if (res.data.resultCode === 0) {
+         // @ts-ignore
+         dispatch(authMe())
+      }
+   })
+}
+export const logout = () => (dispatch: Dispatch<actionTypes>) => {
+   authAPI.logout().then(res => {
+      if (res.data.resultCode === 0) {
+         dispatch(setAuthUserData(null, null, null, false))
+      }
+   })
 }
