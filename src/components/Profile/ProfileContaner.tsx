@@ -12,6 +12,7 @@ import {initialStateProfileType} from '../../redux/Propfile/types'
 import {RouteComponentProps, withRouter} from 'react-router-dom'
 import {compose} from 'redux'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
+import {initialStateAuthType} from '../../redux/Auth/types'
 
 class ProfileContainer extends React.Component<ProfilePropsType, initialStateProfileType> {
 
@@ -31,6 +32,7 @@ class ProfileContainer extends React.Component<ProfilePropsType, initialStatePro
 
 type mapSateToPropsType = {
    profilePage: initialStateProfileType
+   auth: initialStateAuthType
 }
 
 type mapDispatchToPropsType = {
@@ -49,6 +51,7 @@ export type ProfilePropsType = mapSateToPropsType & mapDispatchToPropsType & Rou
 const mapSateToProps = (state: AppStateType): mapSateToPropsType => {
    return {
       profilePage: state.profilePage,
+      auth: state.auth,
    }
 }
 

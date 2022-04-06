@@ -1,6 +1,7 @@
 import {initialStateAuthType} from './types'
 import {authAPI} from '../../api/api'
 import {Dispatch} from 'redux'
+import {stopSubmit} from 'redux-form'
 
 const initialState: initialStateAuthType = {
    userId: null,
@@ -22,7 +23,7 @@ export const authReducer = (state: initialStateAuthType = initialState, action: 
    }
 }
 
-type actionTypes = ReturnType<typeof setAuthUserData>
+type actionTypes = ReturnType<typeof setAuthUserData> | ReturnType<typeof stopSubmit>
 
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
    type: 'SET-USER-DATA',
@@ -49,6 +50,9 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
       if (res.data.resultCode === 0) {
          // @ts-ignore
          dispatch(authMe())
+      } else {
+         const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error'
+         dispatch(stopSubmit('login', {_error: message}))
       }
    })
 }
