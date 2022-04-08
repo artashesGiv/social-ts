@@ -1,13 +1,20 @@
 import React from 'react'
 import preloader from '../../../assets/images/preloader.svg'
 
-type PreloaderPropsType = {
 
-}
+export const Preloader = () => {
 
-export const Preloader = (props: PreloaderPropsType) => {
+   const style = {
+      width: '100%',
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+   }
+
+
    return (
-      <div>
+      <div style={style}>
          <img src={preloader} alt={'preloader'}/>
       </div>
    )

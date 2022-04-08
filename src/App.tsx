@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.scss'
-import {BrowserRouter, Redirect, Route} from 'react-router-dom'
+import {Redirect, Route, withRouter} from 'react-router-dom'
 import ProfileContainer from './components/Profile/ProfileContaner'
 import {News} from './components/News/News'
 import {Music} from './components/Music/Music'
@@ -10,10 +10,26 @@ import UsersContainer from './components/Users/UsersContainer'
 import {NavbarContainer} from './components/Navbar/NavbarContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
+import {connect} from 'react-redux'
+import {compose} from 'redux'
+import {initialStateAuthType} from './redux/Auth/types'
+import {initializeApp} from './redux/App/appReduser'
+import {AppStateType} from './redux/reduxStore'
+import {Preloader} from './components/common/Preloader/Preloader'
+import {initialStateAppType} from './redux/App/types'
 
-export const App = () => {
-   return (
-      <BrowserRouter>
+class App extends React.Component<AppPropsType, initialStateAuthType> {
+
+   componentDidMount() {
+      this.props.initializeApp()
+   }
+
+   render() {
+      if (!this.props.app.initialized) {
+         return <Preloader/>
+      }
+
+      return (
          <div className="app-wrapper">
             <HeaderContainer/>
             <NavbarContainer/>
@@ -28,6 +44,25 @@ export const App = () => {
                <Route path="/login" component={Login}/>
             </div>
          </div>
-      </BrowserRouter>
-   )
+
+      )
+   }
 }
+
+type mapStateToPropsType = {
+   app: initialStateAppType
+}
+type mapDispatchToPropsType = {
+   initializeApp: () => void
+}
+
+type AppPropsType = mapStateToPropsType & mapDispatchToPropsType
+
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
+   app: state.app,
+})
+
+export default compose<React.ComponentType>(
+   withRouter,
+   connect(mapStateToProps, {initializeApp}),
+)(App)

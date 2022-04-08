@@ -18,18 +18,14 @@ export const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoPropsTyp
       const contactsLink = Object.values(contacts)
       return (
          <div>
-            {/*<div>*/}
-            {/*   <img*/}
-            {/*      src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"*/}
-            {/*      alt="bg"/>*/}
-            {/*</div>*/}
             <div className={s.descriptionBlock}>
                <div><h2>{fullName}</h2></div>
                <div className={s.personalBlock}>
                   <div>{photos.large ? <img src={photos.large} alt={'avatar'}/> :
-                     <img src="https://dummyimage.com/200x300&text=avatar" alt={'avatar'}/>}</div>
+                     <img src="https://dummyimage.com/200x300&text=avatar" alt={'avatar'}/>}
+                  </div>
                   <div>
-                     <ProfileStatus status={status} updateStatus={updateStatus} />
+                     <ProfileStatus status={status} updateStatus={updateStatus}/>
                      <h3>Контакты</h3>
                      <ul>
                         {contactsLink.map((c, id) => {
