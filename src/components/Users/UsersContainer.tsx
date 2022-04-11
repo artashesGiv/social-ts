@@ -1,13 +1,13 @@
 import React, {ComponentType} from 'react'
 import {connect} from 'react-redux'
-import {getUsers, followUser, unfollowUser} from '../../redux/Users/usersReducer'
+import {followUser, getUsers, unfollowUser} from '../../redux/Users/usersReducer'
 import {AppStateType} from '../../redux/reduxStore'
 import {Users} from './Users'
 import {Preloader} from '../common/Preloader/Preloader'
 import {initialStateUsersType} from '../../redux/Users/types'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 import {compose} from 'redux'
-import {getUsersPage} from '../../redux/Users/usersSelectors'
+import {getUsersPageSuper} from '../../redux/Users/usersSelectors'
 
 class UsersContainer extends React.Component<UsersPropsType, initialStateUsersType> {
 
@@ -20,7 +20,6 @@ class UsersContainer extends React.Component<UsersPropsType, initialStateUsersTy
    }
 
    render = () => {
-      console.log('render')
       return (
          <>
             {this.props.usersPage.isFetching ? <Preloader/> : null}
@@ -43,9 +42,8 @@ type mapDispatchToPropsType = {
 export type UsersPropsType = mapSateToPropsType & mapDispatchToPropsType
 
 const mapSateToProps = (state: AppStateType): mapSateToPropsType => {
-   console.log('map state to props')
    return {
-      usersPage: getUsersPage(state)
+      usersPage: getUsersPageSuper(state),
    }
 }
 

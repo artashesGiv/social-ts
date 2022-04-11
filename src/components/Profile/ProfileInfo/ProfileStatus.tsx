@@ -18,7 +18,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
    }
 
    activateEditMode = () => {
-      // ассинхронный метод
+      // асинхронный метод
       this.setState({
          editMode: true,
       })
