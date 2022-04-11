@@ -3,6 +3,8 @@ import {authAPI} from '../../api/api'
 import {Dispatch} from 'redux'
 import {stopSubmit} from 'redux-form'
 
+const SET_USER_DATA = 'auth/SET-USER-DATA'
+
 const initialState: initialStateAuthType = {
    userId: null,
    email: null,
@@ -12,7 +14,7 @@ const initialState: initialStateAuthType = {
 
 export const authReducer = (state: initialStateAuthType = initialState, action: actionTypes): initialStateAuthType => {
    switch (action.type) {
-      case 'SET-USER-DATA':
+      case SET_USER_DATA:
          return {
             ...state,
             ...action.payload,
@@ -26,7 +28,7 @@ export const authReducer = (state: initialStateAuthType = initialState, action: 
 type actionTypes = ReturnType<typeof setAuthUserData> | ReturnType<typeof stopSubmit>
 
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
-   type: 'SET-USER-DATA',
+   type: SET_USER_DATA,
    payload: {
       userId,
       email,

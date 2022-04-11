@@ -2,13 +2,15 @@ import {initialStateAppType} from './types'
 import {Dispatch} from 'redux'
 import {authMe} from '../Auth/authReduser'
 
+const INITIALIZED_SUCCESS = 'app/INITIALIZED-SUCCESS'
+
 const initialState: initialStateAppType = {
    initialized: false,
 }
 
 export const appReducer = (state: initialStateAppType = initialState, action: actionTypes): initialStateAppType => {
    switch (action.type) {
-      case 'INITIALIZED-SUCCESS':
+      case INITIALIZED_SUCCESS:
          return {
             ...state,
             initialized: true,
@@ -20,7 +22,7 @@ export const appReducer = (state: initialStateAppType = initialState, action: ac
 }
 
 type actionTypes = ReturnType<typeof initializedSuccess>
-export const initializedSuccess = () => ({type: 'INITIALIZED-SUCCESS'} as const)
+export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS} as const)
 export const initializeApp = () => (dispatch: Dispatch<actionTypes>) => {
    // @ts-ignore
    Promise.all([dispatch(authMe())]).then(() => {

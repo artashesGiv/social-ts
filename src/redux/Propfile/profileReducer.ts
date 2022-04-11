@@ -3,6 +3,11 @@ import {initialStateProfileType, postType, profileType} from './types'
 import {profileAPI} from '../../api/api'
 import {Dispatch} from 'redux'
 
+const ADD_POST = 'profile/ADD-POST'
+const DELETE_POST = 'profile/DELETE-POST'
+const SET_USER_PROFILE = 'profile/SET-USER-PROFILE'
+const SET_USER_STATUS = 'profile/SET-USER-STATUS'
+
 const initialStateProfile: initialStateProfileType = {
    profile: {
       aboutMe: null,
@@ -36,7 +41,7 @@ const initialStateProfile: initialStateProfileType = {
 
 export const profileReducer = (state: initialStateProfileType = initialStateProfile, action: actionsTypes): initialStateProfileType => {
    switch (action.type) {
-      case 'ADD-POST':
+      case ADD_POST:
          const newPost: postType = {
             id: v1(),
             post: action.textPost,
@@ -46,16 +51,16 @@ export const profileReducer = (state: initialStateProfileType = initialStateProf
             ...state,
             posts: [newPost, ...state.posts],
          }
-      case 'DELETE-POST':
+      case DELETE_POST:
          return {
             ...state,
-            posts: state.posts.filter(p => p.id !== action.postId)
+            posts: state.posts.filter(p => p.id !== action.postId),
          }
-      case 'SET-USER-PROFILE':
+      case SET_USER_PROFILE:
          return {
             ...state, profile: action.profile,
          }
-      case 'SET-USER-STATUS':
+      case SET_USER_STATUS:
          return {
             ...state,
             status: action.status,
@@ -72,16 +77,16 @@ type actionsTypes =
    | ReturnType<typeof setUserStatus>
    | ReturnType<typeof deletePost>
 
-export const addPost = (textPost: string) => ({type: 'ADD-POST', textPost} as const)
-export const deletePost = (postId: string) => ({type: 'DELETE-POST', postId} as const)
+export const addPost = (textPost: string) => ({type: ADD_POST, textPost} as const)
+export const deletePost = (postId: string) => ({type: DELETE_POST, postId} as const)
 
 export const setUserProfile = (profile: profileType) => ({
-   type: 'SET-USER-PROFILE',
+   type: SET_USER_PROFILE,
    profile,
 } as const)
 
 export const setUserStatus = (status: string) => ({
-   type: 'SET-USER-STATUS',
+   type: SET_USER_STATUS,
    status,
 } as const)
 
