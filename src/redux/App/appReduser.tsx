@@ -23,11 +23,11 @@ export const appReducer = (state: initialStateAppType = initialState, action: ac
 
 type actionTypes = ReturnType<typeof initializedSuccess>
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS} as const)
-export const initializeApp = () => (dispatch: Dispatch<actionTypes>) => {
+export const initializeApp = () => async (dispatch: Dispatch<actionTypes>) => {
    // @ts-ignore
-   Promise.all([dispatch(authMe())]).then(() => {
-      setTimeout(() => {
-         dispatch(initializedSuccess())
-      }, 1000)
+   const promise = dispatch(authMe())
+
+   await Promise.all([promise]).then(() => {
+      dispatch(initializedSuccess())
    })
 }
