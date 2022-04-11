@@ -1,0 +1,17 @@
+.paginator {
+   display: flex;
+   justify-content: center;
+
+   .selectedPage {
+      font-weight: bold;
+      color: brown;
+   }
+
+   .pagesNumbers {
+      &:hover {
+         cursor: pointer;
+         font-weight: bold;
+      }
+   }
+}
+

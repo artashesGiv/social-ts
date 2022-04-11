@@ -15,7 +15,7 @@ const TOGGLE_IS_FETCHING_PROGRESS = 'users/TOGGLE-IS-FETCHING-PROGRESS'
 const initialStateUsers: initialStateUsersType = {
    users: [],
    pageSize: 50,
-   totalUsersCount: 20,
+   totalUsersCount: 10,
    currentPage: 1,
    isFetching: false,
    followingInProgress: [],
@@ -26,12 +26,12 @@ export const usersReducer = (state: initialStateUsersType = initialStateUsers, a
       case FOLLOW:
          return {
             ...state,
-            users: updateObjectInArray(state.users, action.userId, 'id', {followed: true})
+            users: updateObjectInArray(state.users, action.userId, 'id', {followed: true}),
          }
       case UNFOLLOW:
          return {
             ...state,
-            users: updateObjectInArray(state.users, action.userId, 'id', {followed: false})
+            users: updateObjectInArray(state.users, action.userId, 'id', {followed: false}),
          }
       case SET_USERS:
          return {...state, users: action.users}

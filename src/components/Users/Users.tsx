@@ -3,6 +3,7 @@ import s from './Users.module.scss'
 import userPhoto from '../../assets/images/80x80.png'
 import {UsersPropsType} from './UsersContainer'
 import {NavLink} from 'react-router-dom'
+import {Paginator} from '../common/Paginator/Paginator'
 
 type UsersPropsTypeFunc = {
    usersProps: UsersPropsType
@@ -11,30 +12,27 @@ type UsersPropsTypeFunc = {
 
 export const Users = ({usersProps, onPageChanged}: UsersPropsTypeFunc) => {
 
-   const pagesCount = Math.ceil(usersProps.usersPage.totalUsersCount / usersProps.usersPage.pageSize)
-   const pages = Array.from(Array(pagesCount).keys()).map(x => ++x)
+   const {
+      usersPage,
+      followUser,
+      unfollowUser,
+   } = usersProps
 
+   const {
+      users,
+      pageSize,
+      followingInProgress,
+      totalUsersCount,
+      currentPage,
+   } = usersPage
 
-   const pagesNumbersForRender =
-      pages.map(p => {
-         const currentPageClassName = usersProps.usersPage.currentPage === p ? s.selectedPage : ''
-         const pagesNumbersClassName = `${currentPageClassName} ${s.pagesNumbers}`
-
-         return (
-            <span key={p}
-                  onClick={() => onPageChanged(p)}
-                  className={pagesNumbersClassName}>{p + ' '}
-            </span>
-         )
-      })
 
    return (
       <div className={s.users}>
-         <div>
-            {pagesNumbersForRender}
-         </div>
+         <Paginator onPageChanged={onPageChanged} currentPage={currentPage} pageSize={pageSize}
+                    totalItemsCount={totalUsersCount}/>
          {
-            usersProps.usersPage.users.map(u => {
+            users.map(u => {
                return (
                   <div key={u.id}>
                      <span>
@@ -46,11 +44,11 @@ export const Users = ({usersProps, onPageChanged}: UsersPropsTypeFunc) => {
                         <div>
                            {
                               u.followed
-                                 ? <button disabled={usersProps.usersPage.followingInProgress.some(id => id === u.id)}
-                                           onClick={() => usersProps.unfollowUser(u.id)}>unfollow</button>
+                                 ? <button disabled={followingInProgress.some(id => id === u.id)}
+                                           onClick={() => unfollowUser(u.id)}>unfollow</button>
 
-                                 : <button disabled={usersProps.usersPage.followingInProgress.some(id => id === u.id)}
-                                           onClick={() => usersProps.followUser(u.id)}>follow</button>
+                                 : <button disabled={followingInProgress.some(id => id === u.id)}
+                                           onClick={() => followUser(u.id)}>follow</button>
                            }
                         </div>
                      </span>
