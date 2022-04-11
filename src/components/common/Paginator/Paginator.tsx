@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import s from './Paginator.module.scss'
 
 type PaginatorPropsType = {
@@ -24,6 +24,11 @@ export const Paginator = ({
    const [portionNumber, setPortionNumber] = useState<number>(1)
    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
    const rightPortionPageNumber = portionNumber * portionSize
+
+   useEffect(() => {
+         setPortionNumber(Math.ceil(currentPage / portionSize))
+      }, [currentPage],
+   )
 
 
    return (
