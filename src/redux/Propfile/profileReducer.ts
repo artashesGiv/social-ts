@@ -7,6 +7,7 @@ const ADD_POST = 'profile/ADD-POST'
 const DELETE_POST = 'profile/DELETE-POST'
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE'
 const SET_USER_STATUS = 'profile/SET-USER-STATUS'
+const SET_USER_PHOTO = 'profile/SET-USER-PHOTO'
 
 const initialStateProfile: initialStateProfileType = {
    profile: {
@@ -58,12 +59,21 @@ export const profileReducer = (state: initialStateProfileType = initialStateProf
          }
       case SET_USER_PROFILE:
          return {
-            ...state, profile: action.profile,
+            ...state,
+            profile: action.profile,
          }
       case SET_USER_STATUS:
          return {
             ...state,
             status: action.status,
+         }
+      case SET_USER_PHOTO:
+         return {
+            ...state,
+            profile: {
+               ...state.profile,
+               photos: action.photos,
+            },
          }
 
       default:
@@ -76,6 +86,7 @@ type actionsTypes =
    | ReturnType<typeof setUserProfile>
    | ReturnType<typeof setUserStatus>
    | ReturnType<typeof deletePost>
+   | ReturnType<typeof setUserPhoto>
 
 export const addPost = (textPost: string) => ({type: ADD_POST, textPost} as const)
 export const deletePost = (postId: string) => ({type: DELETE_POST, postId} as const)
@@ -89,6 +100,12 @@ export const setUserStatus = (status: string) => ({
    type: SET_USER_STATUS,
    status,
 } as const)
+
+export const setUserPhoto = (photos: { large: string, small: string }) => ({
+   type: SET_USER_PHOTO,
+   photos,
+} as const)
+
 
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch<actionsTypes>) => {
    const res = await profileAPI.getProfile(userId)
@@ -104,5 +121,13 @@ export const updateUserStatus = (status: string) => async (dispatch: Dispatch<ac
    const res = await profileAPI.updateStatus(status)
    if (res.data.resultCode === 0) {
       dispatch(setUserStatus(status))
+   }
+}
+
+export const savePhoto = (photo: File) => async (dispatch: Dispatch<actionsTypes>) => {
+   const res = await profileAPI.savePhoto(photo)
+   if (res.data.resultCode === 0) {
+      const photos = res.data.data
+      dispatch(setUserPhoto(photos))
    }
 }

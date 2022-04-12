@@ -27,7 +27,7 @@ export const Paginator = ({
 
    useEffect(() => {
          setPortionNumber(Math.ceil(currentPage / portionSize))
-      }, [currentPage],
+      }, [currentPage, portionSize],
    )
 
 

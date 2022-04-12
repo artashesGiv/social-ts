@@ -1,13 +1,21 @@
 import React from 'react'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo'
-import {ProfilePropsType} from './ProfileContaner'
 import {MyPosts} from './MyPosts/MyPosts'
+import {initialStateProfileType} from '../../redux/Propfile/types'
 
-export const Profile = ({profilePage, addPost, updateUserStatus}: ProfilePropsType) => {
+type ProfileProps = {
+   profilePage: initialStateProfileType
+   isOwner: boolean
+   addPost: (postText: string) => void
+   updateUserStatus: (status: string) => void
+   savePhoto: (photo: File) => void
+}
+
+export const Profile = ({profilePage, addPost, updateUserStatus, isOwner, savePhoto}: ProfileProps) => {
 
    return (
       <div>
-         <ProfileInfo profile={profilePage.profile} status={profilePage.status} updateStatus={updateUserStatus}/>
+         <ProfileInfo profile={profilePage.profile} status={profilePage.status} updateStatus={updateUserStatus} isOwner={isOwner} savePhoto={savePhoto}/>
          <MyPosts posts={profilePage.posts} addPost={addPost}/>
       </div>
    )

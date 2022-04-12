@@ -12,6 +12,7 @@ type UsersPropsTypeFunc = {
 
 export const Users = ({usersProps, onPageChanged}: UsersPropsTypeFunc) => {
 
+
    const {
       usersPage,
       followUser,
@@ -30,7 +31,7 @@ export const Users = ({usersProps, onPageChanged}: UsersPropsTypeFunc) => {
    return (
       <div className={s.users}>
          <Paginator onPageChanged={onPageChanged} currentPage={currentPage} pageSize={pageSize}
-                    totalItemsCount={totalUsersCount}/>
+                    totalItemsCount={totalUsersCount} portionSize={30}/>
          {
             users.map(u => {
                return (

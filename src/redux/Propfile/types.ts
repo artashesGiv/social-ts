@@ -18,7 +18,7 @@ export type profileType = {
       small: string
       large: string
    }
-} | null
+}
 
 export type postType = {
    id: string
