@@ -10,7 +10,7 @@ type LocalStateType = {
    editMode: boolean
 }
 
-export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
+export class EditableSpanClass extends React.Component<ProfileStatusPropsType> {
 
    state: LocalStateType = {
       status: this.props.status,
@@ -63,56 +63,3 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
       )
    }
 }
-
-// export const ProfileStatus = (props: ProfileStatusPropsType) => {
-//
-//    const [state, setState] = useState<LocalStateType>({
-//       status: props.status,
-//       editMode: false,
-//    })
-//
-//    const activateEditMode = () => {
-//       setState({
-//          ...state,
-//          editMode: true,
-//       })
-//    }
-//
-//    const deactivateEditMode = () => {
-//       setState({
-//          ...state,
-//          editMode: false,
-//       })
-//       props.updateStatus(state.status)
-//    }
-//
-//    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-//       setState({
-//          ...state,
-//          status: e.currentTarget.value,
-//       })
-//    }
-//
-//    useEffect(() => {
-//       setState({
-//          ...state,
-//          status: props.status,
-//       })
-//    }, [props.status])
-//
-//    return (
-//       <div>
-//          {!state.editMode &&
-//            <div>
-//              <span onDoubleClick={activateEditMode}>{props.status || 'Установить статус'}</span>
-//            </div>
-//          }
-//          {state.editMode &&
-//            <div>
-//              <input value={state.status} onBlur={deactivateEditMode} autoFocus={true}
-//                     onChange={onStatusChange}/>
-//            </div>
-//          }
-//       </div>
-//    )
-// }

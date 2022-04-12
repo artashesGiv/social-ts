@@ -17,7 +17,12 @@ import {initialStateAuthType} from '../../redux/Auth/types'
 class ProfileContainer extends React.Component<ProfilePropsType, initialStateProfileType> {
 
    refreshProfile() {
-      const userId = this.props.match.params.userId || '21110'
+      let userId = +this.props.match.params.userId
+      if (!userId) {
+         this.props.auth.userId
+            ? userId = this.props.auth.userId
+            : this.props.history.push('/login')
+      }
       this.props.getUserProfile(userId)
       this.props.getUserStatus(userId)
    }
@@ -39,7 +44,7 @@ class ProfileContainer extends React.Component<ProfilePropsType, initialStatePro
                   profilePage={this.props.profilePage}
                   savePhoto={this.props.savePhoto}
                   addPost={this.props.addPost}
-                  updateUserStatus={this.props.getUserStatus}
+                  updateUserStatus={this.props.updateUserStatus}
          />
       )
    }
@@ -52,8 +57,8 @@ type mapSateToPropsType = {
 
 type mapDispatchToPropsType = {
    addPost: (postText: string) => void
-   getUserProfile: (userId: string) => void
-   getUserStatus: (userId: string) => void
+   getUserProfile: (userId: number) => void
+   getUserStatus: (userId: number) => void
    updateUserStatus: (status: string) => void
    savePhoto: (photo: File) => void
 }

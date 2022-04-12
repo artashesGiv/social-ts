@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react'
 import s from './ProfileInfo.module.scss'
 import {Preloader} from '../../common/Preloader/Preloader'
 import {profileType} from '../../../redux/Propfile/types'
-import {ProfileStatusHooks} from './ProfileStatusHooks'
+import {EditableSpan} from '../../common/EditableSpan/EditableSpan'
 
 type ProfileInfoPropsType = {
    profile: profileType
@@ -33,7 +33,11 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}:
                   <img src={photos.large || 'https://dummyimage.com/200x300&text=avatar'} alt={'avatar'}/>
                   {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
                   <div>
-                     <ProfileStatusHooks status={status} updateStatus={updateStatus}/>
+                     {
+                        isOwner
+                        ? <EditableSpan value={status} updateValue={updateStatus} defaultValue={'Установить статус'}/>
+                        : <span>{status}</span>
+                     }
                      <h3>Контакты</h3>
                      <ul>
                         {contactsLink.map((c, id) => {
