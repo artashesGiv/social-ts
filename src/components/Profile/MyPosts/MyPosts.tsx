@@ -13,7 +13,7 @@ type MyPostsPropsType = {
 
 export const MyPosts = ({posts, addPost}: MyPostsPropsType) => {
 
-   let postsElement = posts.map(p => <Post key={p.id} id={p.id} message={p.post} likesCount={p.like}/>)
+   const postsElement = posts.map(p => <Post key={p.id} id={p.id} message={p.post} likesCount={p.like}/>)
 
    const addNewPost = (values: FormDataType) => {
       addPost(values.postText)
@@ -21,12 +21,14 @@ export const MyPosts = ({posts, addPost}: MyPostsPropsType) => {
 
    return (
       <div className={s.postsBlock}>
-         <h3>my posts</h3>
-         <div>
-            <AddPostForm onSubmit={addNewPost}/>
-         </div>
-         <div className={s.posts}>
-            {postsElement}
+         <div className={s.wrapper}>
+            <h3>Мои записи</h3>
+            <div>
+               <AddPostForm onSubmit={addNewPost}/>
+            </div>
+            <div className={s.posts}>
+               {postsElement}
+            </div>
          </div>
       </div>
    )
@@ -36,7 +38,7 @@ type FormDataType = {
    postText: string
 }
 
-const maxLength30 = maxLength()
+const maxLength200 = maxLength(200)
 
 const AddPostForm = reduxForm<FormDataType>({form: 'addPost'})(
    (props: InjectedFormProps<FormDataType>) => {
@@ -44,13 +46,13 @@ const AddPostForm = reduxForm<FormDataType>({form: 'addPost'})(
       const {handleSubmit} = props
 
       return (
-         <form onSubmit={handleSubmit}>
+         <form onSubmit={handleSubmit} className={s.form}>
             <div>
                <Field placeholder={'Your post message'} name={'postText'} component={Textarea}
-                      validate={[required, maxLength30]}/>
+                      validate={[required, maxLength200]}/>
             </div>
-            <div>
-               <button>ADD</button>
+            <div className={s.button}>
+               <button>Добавить</button>
             </div>
          </form>
       )

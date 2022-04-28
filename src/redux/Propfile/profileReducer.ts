@@ -2,6 +2,7 @@ import {v1} from 'uuid'
 import {initialStateProfileType, postType, profileType} from './types'
 import {profileAPI} from '../../api/api'
 import {Dispatch} from 'redux'
+import {stopSubmit} from 'redux-form'
 
 const ADD_POST = 'profile/ADD-POST'
 const DELETE_POST = 'profile/DELETE-POST'
@@ -106,7 +107,6 @@ export const setUserPhoto = (photos: { large: string, small: string }) => ({
    photos,
 } as const)
 
-
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch<actionsTypes>) => {
    const res = await profileAPI.getProfile(userId)
    dispatch(setUserProfile(res.data))
@@ -127,7 +127,22 @@ export const updateUserStatus = (status: string) => async (dispatch: Dispatch<ac
 export const savePhoto = (photo: File) => async (dispatch: Dispatch<actionsTypes>) => {
    const res = await profileAPI.savePhoto(photo)
    if (res.data.resultCode === 0) {
-      const photos = res.data.data
+      const photos = res.data.data.photos
       dispatch(setUserPhoto(photos))
+   }
+}
+
+export const saveProfile = (profile: any) => async (dispatch: Dispatch<actionsTypes>, getState: any) => {
+   const userId =  getState().auth.userId
+   const res = await profileAPI.saveProfile(profile)
+   if (res.data.resultCode === 0) {
+      // @ts-ignore
+      dispatch(getUserProfile(userId))
+   } else {
+      const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error'
+      // @ts-ignore
+      dispatch(stopSubmit('edit-profile', {_error: message}))
+   //                                                 {'contacts': {'facebook': message}
+      return Promise.reject(message)
    }
 }

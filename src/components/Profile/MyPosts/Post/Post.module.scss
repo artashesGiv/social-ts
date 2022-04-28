@@ -1,0 +1,33 @@
+@import 'src/style/common';
+
+.item {
+   @include Block;
+   display: flex;
+   flex-direction: column;
+   gap: 25px;
+   height: max-content;
+
+   .header {
+      display: flex;
+
+      span {
+         margin-top: 10px;
+         margin-left: 20px;
+      }
+   }
+
+   .content {
+      word-wrap: break-word;
+   }
+
+   .footer {
+
+   }
+
+   img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      //border: 1px solid $main-text-color;
+   }
+}

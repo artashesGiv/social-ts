@@ -24,11 +24,11 @@ const FormControl = (props: InputPropsType) => {
 }
 
 export const Input = (props: InputPropsType & InputType<HTMLInputElement>) => {
-   const {input, meta, children, ...restProps} = props
-   return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
+   const {input, ...restProps} = props
+   return <FormControl {...props}><input {...input} {...restProps} className={s.input}/></FormControl>
 }
 
 export const Textarea = (props: InputPropsType & InputType<HTMLTextAreaElement>) => {
-   const {input, meta, children, ...restProps} = props
-   return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
+   const {input, ...restProps} = props
+   return <FormControl {...props}><textarea {...input} {...restProps} className={s.textarea}/></FormControl>
 }

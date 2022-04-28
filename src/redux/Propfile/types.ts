@@ -1,15 +1,6 @@
 export type profileType = {
    aboutMe: string | null
-   contacts: {
-      facebook: string | null
-      website: string | null
-      vk: string | null
-      twitter: string | null
-      instagram: string | null
-      youtube: string | null
-      github: string | null
-      mainLink: string | null
-   }
+   contacts: ContactsProfileType
    lookingForAJob: boolean
    lookingForAJobDescription: string | null
    fullName: string | null
@@ -18,6 +9,17 @@ export type profileType = {
       small: string
       large: string
    }
+}
+
+export type ContactsProfileType = {
+   facebook: string | null
+   website: string | null
+   vk: string | null
+   twitter: string | null
+   instagram: string | null
+   youtube: string | null
+   github: string | null
+   mainLink: string | null
 }
 
 export type postType = {

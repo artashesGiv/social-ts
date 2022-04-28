@@ -1,11 +1,14 @@
+@import 'src/style/common';
+
 .item {
    margin-bottom: 10px;
 
    a {
-      color: white;
+      color: $main-text-color;
       text-decoration: none;
+      font-weight: bold;
    }
    .active {
-      color: gold;
+      color:  $main-color-darken
    }
 }

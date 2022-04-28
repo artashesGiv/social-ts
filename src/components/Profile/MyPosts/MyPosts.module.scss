@@ -1,7 +1,40 @@
-.postsBlock {
-    padding: 10px;
-}
+@import 'src/style/common';
 
-.posts {
-    margin-top: 10px;
+.postsBlock {
+   @include Block;
+   margin-top: 20px;
+
+   .wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin: 0 auto;
+      width: 80%;
+   }
+
+   .posts {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+   }
+
+   .form {
+      @include Block;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      textarea {
+         width: 100%;
+         min-height: 70px;
+      }
+
+      .button {
+         align-self: flex-end;
+
+         button {
+            @include Button;
+         }
+      }
+   }
 }

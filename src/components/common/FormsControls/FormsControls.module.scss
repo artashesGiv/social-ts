@@ -1,5 +1,18 @@
+@import 'src/style/common';
+
 .formControl {
 
+   .textarea {
+      resize: none;
+      outline: none;
+      border: none;
+      box-shadow: $shadow;
+      padding: 10px;
+   }
+
+   .input {
+
+   }
 
    &.error {
       input, textarea {

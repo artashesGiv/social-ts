@@ -4,6 +4,7 @@ type ProfileStatusPropsType = {
    value: string
    defaultValue: string
    updateValue: (status: string) => void
+   className?: string
 }
 
 export const EditableSpan = (props: ProfileStatusPropsType) => {
@@ -28,8 +29,8 @@ export const EditableSpan = (props: ProfileStatusPropsType) => {
       <div>
          {
             !editMode &&
-           <div>
-             <span onDoubleClick={activateEditMode}>{props.value || props.defaultValue}</span>
+           <div className={props.className} onClick={activateEditMode}>
+             <span>{props.value || props.defaultValue}</span>
            </div>
          }
          {

@@ -1,5 +1,8 @@
 import React from 'react'
-import s from './Post.module.css'
+import s from './Post.module.scss'
+import {useSelector} from 'react-redux'
+import {AppStateType} from '../../../../redux/reduxStore'
+import {profileType} from '../../../../redux/Propfile/types'
 
 type PropsPost = {
    id: string
@@ -8,12 +11,20 @@ type PropsPost = {
 }
 
 export const Post = (props: PropsPost) => {
+
+   const profile = useSelector<AppStateType, profileType>(state => state.profilePage.profile)
+
    return (
       <div className={s.item}>
-         <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" alt="avatar"/>
-         {props.message}
-         <div>
-            <span>{props.likesCount} like</span>
+         <div className={s.header}>
+            <img src={profile.photos.small || 'https://dummyimage.com/50x50&text=avatar'} alt="avatar"/>
+            <span>{profile.fullName}</span>
+         </div>
+         <div className={s.content}>
+            {props.message}
+         </div>
+         <div className={s.footer}>
+            <span> &#10084; {props.likesCount}</span>
          </div>
       </div>
    )

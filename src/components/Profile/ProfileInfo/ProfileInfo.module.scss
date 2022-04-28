@@ -1,8 +1,45 @@
-.descriptionBlock {
-  padding: 10px;
-  .personalBlock {
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-  }
+@import 'src/style/common';
+
+.profile {
+   display: flex;
+   justify-content: space-between;
+   gap: 20px;
+
+   .main, .info {
+      @include Block;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+
+      .changePhoto {
+         border: 1px solid #444;
+      }
+   }
+
+   .main {
+      width: min(330px, 30%);
+   }
+
+   .info {
+      width: 100%;
+
+      .status {
+         cursor: pointer;
+
+         &:hover {
+            background-color: darken($contrast-color, 3%);
+         }
+      }
+
+      .profileData {
+         display: flex;
+         flex-direction: column;
+         gap: 25px;
+
+         .editButton {
+            @include Button;
+            width: 150px;
+         }
+      }
+   }
 }
