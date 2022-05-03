@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import s from './NavbarItem.module.scss'
+import s from './../Navbar.module.scss'
 
 type navbarElementType = {
    name: string
@@ -9,9 +9,7 @@ type navbarElementType = {
 
 const NavbarItem = (props: navbarElementType) => {
    return (
-      <div className={`${s.item} ${s.active}`}>
-         <NavLink to={props.link} activeClassName={s.active}>{props.name}</NavLink>
-      </div>
+      <NavLink to={props.link} className={s.item} activeClassName={s.active}>{props.name}</NavLink>
    )
 }
 

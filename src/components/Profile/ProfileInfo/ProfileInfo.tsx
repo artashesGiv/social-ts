@@ -94,31 +94,30 @@ const Contacts = ({contacts}: { contacts: ContactsProfileType }) => {
          <div>
             <h4>Контакты:</h4>
             <div>
-               GitHub: {<a href={github?.toString()} target={'_blank'}>{github}</a> || '-----'}
+               GitHub: {<a href={github?.toString()} rel="noreferrer" target={'_blank'}>{github}</a> || '-----'}
             </div>
             <div>
-               VK: {<a href={vk?.toString()} target={'_blank'}>{vk}</a> || '-----'}
+               VK: {<a href={vk?.toString()} rel="noreferrer" target={'_blank'}>{vk}</a> || '-----'}
             </div>
             <div>
                Facebook: {<a href={facebook?.toString()}
-                             target={'_blank'}>{facebook}</a> || '-----'}
+                             rel="noreferrer" target={'_blank'}>{facebook}</a> || '-----'}
             </div>
             <div>
                Instagram: {<a href={instagram?.toString()}
-                              target={'_blank'}>{instagram}</a> || '-----'}
+                              rel="noreferrer" target={'_blank'}>{instagram}</a> || '-----'}
             </div>
             <div>
-               Twitter: {<a href={twitter?.toString()} target={'_blank'}>{twitter}</a> || '-----'}
+               Twitter: {<a href={twitter?.toString()} rel="noreferrer" target={'_blank'}>{twitter}</a> || '-----'}
             </div>
             <div>
-               Website: {<a href={website?.toString()} target={'_blank'}>{website}</a> || '-----'}
+               Website: {<a href={website?.toString()} rel="noreferrer" target={'_blank'}>{website}</a> || '-----'}
             </div>
             <div>
-               YouTube: {<a href={youtube?.toString()} target={'_blank'}>{youtube}</a> || '-----'}
+               YouTube: {<a href={youtube?.toString()} rel="noreferrer" target={'_blank'}>{youtube}</a> || '-----'}
             </div>
             <div>
-               Email: {<a href={mainLink?.toString()}
-                          target={'_blank'}>{mainLink}</a> || '-----'}
+               Email: {<a href={mainLink?.toString()} rel="noreferrer" target={'_blank'}>{mainLink}</a> || '-----'}
             </div>
          </div>
       </div>

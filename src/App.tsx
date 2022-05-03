@@ -32,21 +32,22 @@ class App extends React.Component<AppPropsType, initialStateAuthType> {
       }
 
       return (
-         <div className="app-wrapper">
+         <div>
             <HeaderContainer/>
-            <NavbarContainer/>
-            <div className="app-wrapper-content">
-               <Route path="/" exact render={() => <Redirect to="/profile"/>}/>
-               <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
-               <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
-               <Route path="/users" render={withSuspense(UsersContainer)}/>
-               <Route path="/news" component={News}/>
-               <Route path="/music" component={Music}/>
-               <Route path="/settings" component={Settings}/>
-               <Route path="/login" component={Login}/>
+            <div className="app-wrapper">
+               <NavbarContainer/>
+               <div className="app-wrapper-content">
+                  <Route path="/" exact render={() => <Redirect to="/profile"/>}/>
+                  <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
+                  <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
+                  <Route path="/users" render={withSuspense(UsersContainer)}/>
+                  <Route path="/news" component={News}/>
+                  <Route path="/music" component={Music}/>
+                  <Route path="/settings" component={Settings}/>
+                  <Route path="/login" component={Login}/>
+               </div>
             </div>
          </div>
-
       )
    }
 }

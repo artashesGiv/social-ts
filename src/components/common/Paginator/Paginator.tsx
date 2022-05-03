@@ -35,7 +35,7 @@ export const Paginator = ({
       <div className={s.paginator}>
          <div>
             {portionNumber > 1 &&
-              <button onClick={() => setPortionNumber(portionNumber - 1)}>{'<--'}</button>}
+              <button onClick={() => setPortionNumber(portionNumber - 1)}>{'<'}</button>}
             {
                pages
                   .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -51,9 +51,12 @@ export const Paginator = ({
                      )
                   })
             }
-
-            {portionCount > portionNumber &&
-              <button onClick={() => setPortionNumber(portionNumber + 1)}>{'-->'}</button>}
+            {
+               portionCount > portionNumber &&
+              <button onClick={() => setPortionNumber(portionNumber + 1)}>
+                 {'>'}
+              </button>
+            }
          </div>
       </div>
    )

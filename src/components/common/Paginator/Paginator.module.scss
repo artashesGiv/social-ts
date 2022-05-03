@@ -1,17 +1,34 @@
+@import 'src/style/common';
+
 .paginator {
+   @include Block;
    display: flex;
    justify-content: center;
-
+   
    .selectedPage {
       font-weight: bold;
-      color: brown;
+      color: $main-color;
    }
 
    .pagesNumbers {
+      cursor: pointer;
+
       &:hover {
-         cursor: pointer;
          font-weight: bold;
       }
    }
+
+   button {
+      border: none;
+      cursor: pointer;
+      background-color: $contrast-color;
+      padding: 5px;
+      font-size: 15px;
+
+      &:hover {
+         font-weight: bold;
+      }
+   }
+
 }
 

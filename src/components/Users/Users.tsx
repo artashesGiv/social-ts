@@ -27,42 +27,38 @@ export const Users = ({usersProps, onPageChanged}: UsersPropsTypeFunc) => {
       currentPage,
    } = usersPage
 
+   const follow = (id: number) => {
+      followUser(id)
+   }
+
+   const unfollow = (id: number) => {
+      unfollowUser(id)
+   }
 
    return (
       <div className={s.users}>
          <Paginator onPageChanged={onPageChanged} currentPage={currentPage} pageSize={pageSize}
-                    totalItemsCount={totalUsersCount} portionSize={30}/>
+                    totalItemsCount={totalUsersCount} portionSize={25}/>
          {
             users.map(u => {
                return (
-                  <div key={u.id}>
-                     <span>
-                        <div>
-                           <NavLink to={'/profile/' + u.id}>
-                              <img src={u.photos.small !== null ? u.photos.small : userPhoto} alt={'avatar'}/>
-                           </NavLink>
-                        </div>
-                        <div>
-                           {
-                              u.followed
-                                 ? <button disabled={followingInProgress.some(id => id === u.id)}
-                                           onClick={() => unfollowUser(u.id)}>unfollow</button>
+                  <div key={u.id} className={s.user}>
+                     <NavLink to={'/profile/' + u.id}>
+                        <img src={u.photos.small || userPhoto} alt={'avatar'}/>
+                     </NavLink>
+                     <NavLink to={'/profile/' + u.id}>
+                        {u.name}
+                     </NavLink>
+                     <div className={s.button}>
+                        {
+                           u.followed
+                              ? <button disabled={followingInProgress.some(id => id === u.id)}
+                                        onClick={() => unfollow(u.id)}>unfollow</button>
 
-                                 : <button disabled={followingInProgress.some(id => id === u.id)}
-                                           onClick={() => followUser(u.id)}>follow</button>
-                           }
-                        </div>
-                     </span>
-                     <span>
-                        <span>
-                           <div>{u.name}</div>
-                           <div>{u.status}</div>
-                        </span>
-                        <span>
-                           <div>{'u.location.country'}</div>
-                           <div>{'u.location.city'}</div>
-                        </span>
-                     </span>
+                              : <button disabled={followingInProgress.some(id => id === u.id)}
+                                        onClick={() => follow(u.id)}>follow</button>
+                        }
+                     </div>
                   </div>
                )
             })

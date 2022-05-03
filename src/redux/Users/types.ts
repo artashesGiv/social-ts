@@ -4,7 +4,7 @@ type photosType = {
    large: string
 }
 
-export type usersType = {
+export type userType = {
    name: string
    id: number
    photos: photosType
@@ -13,7 +13,7 @@ export type usersType = {
 }
 
 export type initialStateUsersType = {
-   users: Array<usersType>
+   users: Array<userType>
    pageSize: number
    totalUsersCount: number
    currentPage: number

@@ -2,6 +2,7 @@ import React from 'react'
 import s from './ProfileInfo.module.scss'
 import {Input, Textarea} from '../../common/FormsControls/FormsControls'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
+import {maxLength, required} from '../../../utils/validators/validators'
 
 export type FormProfileDataType = {
    github: string | null
@@ -18,10 +19,11 @@ export type FormProfileDataType = {
    fullName: string | null
 }
 
-const ProfileDataForm = ({handleSubmit, error}: InjectedFormProps<FormProfileDataType>) => {
+const maxLength1000 = maxLength(1000)
 
+const ProfileDataForm = ({handleSubmit, error}: InjectedFormProps<FormProfileDataType>) => {
    return (
-      <form onSubmit={handleSubmit}  className={s.profileData}>
+      <form onSubmit={handleSubmit} className={s.profileData}>
          {
             error && <div>{error}</div>
          }
@@ -33,40 +35,48 @@ const ProfileDataForm = ({handleSubmit, error}: InjectedFormProps<FormProfileDat
             <div>
                Looking for a job: <Field name={'lookingForAJob'} component={Input} type={'checkbox'}/>
                Looking for a job description: <Field placeholder={'description'} name={'lookingForAJobDescription'}
-                                                     component={Textarea}/>
+                                                     component={Textarea} validate={[required, maxLength1000]}/>
             </div>
             <div>
-               AboutMe: <Field placeholder={'About me'} name={'aboutMe'} component={Textarea}/>
+               AboutMe: <Field placeholder={'About me'} name={'aboutMe'} component={Textarea} validate={[required, maxLength1000]}/>
             </div>
          </div>
          <div>
             <h3>Контакты:</h3>
             <div>
-               GitHub: <Field placeholder={'GitGub'} name={'contacts.github'} component={Input}/>
+               GitHub:
+               <Field placeholder={'GitGub'} name={'contacts.github'} validate={[required]} component={Input}/>
             </div>
             <div>
-               VK: <Field placeholder={'VK'} name={'contacts.vk'} component={Input}/>
+               VK:
+               <Field placeholder={'VK'} name={'contacts.vk'} validate={[required]} component={Input}/>
             </div>
             <div>
-               Facebook: <Field placeholder={'Facebook'} name={'contacts.facebook'} component={Input}/>
+               Facebook:
+               <Field placeholder={'Facebook'} name={'contacts.facebook'} validate={[required]} component={Input}/>
             </div>
             <div>
-               Instagram: <Field placeholder={'Instagram'} name={'contacts.instagram'} component={Input}/>
+               Instagram:
+               <Field placeholder={'Instagram'} name={'contacts.instagram'} validate={[required]} component={Input}/>
             </div>
             <div>
-               Twitter: <Field placeholder={'Twitter'} name={'contacts.twitter'} component={Input}/>
+               Twitter:
+               <Field placeholder={'Twitter'} name={'contacts.twitter'} validate={[required]} component={Input}/>
             </div>
             <div>
-               Website: <Field placeholder={'Website'} name={'contacts.website'} component={Input}/>
+               Website:
+               <Field placeholder={'Website'} name={'contacts.website'} validate={[required]} component={Input}/>
             </div>
             <div>
-               YouTube: <Field placeholder={'YouTube'} name={'contacts.youtube'} component={Input}/>
+               YouTube:
+               <Field placeholder={'YouTube'} name={'contacts.youtube'} validate={[required]} component={Input}/>
             </div>
             <div>
-               MainLink: <Field placeholder={'MailLink'} name={'contacts.mainLink'} component={Input}/>
+               MainLink:
+               <Field placeholder={'MailLink'} name={'contacts.mainLink'} validate={[required]} component={Input}/>
             </div>
          </div>
-         <button className={s.editButton}>save</button>
+         <button className={s.editButton}>Сохранить</button>
       </form>
    )
 }

@@ -1,10 +1,31 @@
 @import 'src/style/common';
 
 .nav {
-  @include Container;
-  grid-area: nav;
-  min-height: 100vh;
-  box-shadow: -5px 0px 10px 2px rgba(34, 60, 80, 0.2) inset;
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+   grid-area: nav;
+   height: min-content;
+   margin-top: 20px;
+
+   .item {
+      padding: 5px 10px;
+
+      color: $main-text-color;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+         border-radius: 5px;
+         background-color: #ececec;
+      }
+   }
+
+   .active {
+      color: $main-color-darken;
+      border-radius: 5px;
+      background-color: #ececec;
+   }
 }
 
 

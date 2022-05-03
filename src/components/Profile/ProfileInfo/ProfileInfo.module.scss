@@ -17,7 +17,7 @@
    }
 
    .main {
-      width: min(330px, 30%);
+      width: min(330px, 27%);
    }
 
    .info {
@@ -36,9 +36,18 @@
          flex-direction: column;
          gap: 25px;
 
+         & > * {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+         }
+
          .editButton {
             @include Button;
             width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
          }
       }
    }

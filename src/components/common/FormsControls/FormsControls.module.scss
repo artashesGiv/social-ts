@@ -8,10 +8,12 @@
       border: none;
       box-shadow: $shadow;
       padding: 10px;
+      width: 100%;
+      height: 200px
    }
 
    .input {
-
+      @include Input;
    }
 
    &.error {
