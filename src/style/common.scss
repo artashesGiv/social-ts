@@ -3,7 +3,7 @@
    padding: 5px 20px;
    height: 30px;
    cursor: pointer;
-   border-radius: 8px;
+   border-radius: 6px;
    background-color: $main-color;
    box-shadow: $shadow;
    font-size: 15px;
@@ -25,7 +25,7 @@
 }
 
 @mixin Input {
-   width: 300px;
+   border: none;
    height: 25px;
    padding: 5px 10px;
    font-size: 15px;

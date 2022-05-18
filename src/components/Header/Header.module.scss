@@ -38,7 +38,7 @@
       .logoutBtn {
          @include Button;
          background-color: $contrast-color;
-         box-shadow: 0 0 5px 2px $contrast-color;
+         box-shadow: 0 0 5px .5px $contrast-color;
          margin-left: 15px;
          color: $main-text-color;
 

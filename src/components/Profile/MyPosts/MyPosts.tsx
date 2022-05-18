@@ -3,26 +3,29 @@ import s from './MyPosts.module.scss'
 import {Post} from './Post/Post'
 import {postType} from '../../../redux/Propfile/types'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
-import {maxLength, required} from '../../../utils/validators/validators'
+import {maxLength} from '../../../utils/validators/validators'
 import {Textarea} from '../../common/FormsControls/FormsControls'
 
 type MyPostsPropsType = {
    posts: postType[]
    addPost: (postText: string) => void
+   isOwner: boolean
+   owner: string | null
 }
 
-export const MyPosts = ({posts, addPost}: MyPostsPropsType) => {
+export const MyPosts = ({posts, addPost, isOwner, owner}: MyPostsPropsType) => {
 
    const postsElement = posts.map(p => <Post key={p.id} id={p.id} message={p.post} likesCount={p.like}/>)
 
    const addNewPost = (values: FormDataType) => {
       addPost(values.postText)
+      values.postText = ''
    }
 
    return (
       <div className={s.postsBlock}>
          <div className={s.wrapper}>
-            <h3>Мои записи</h3>
+            <h3>{isOwner ? 'Мои записи' : `Записи ${owner}`}</h3>
             <div>
                <AddPostForm onSubmit={addNewPost}/>
             </div>
@@ -48,8 +51,8 @@ const AddPostForm = reduxForm<FormDataType>({form: 'addPost'})(
       return (
          <form onSubmit={handleSubmit} className={s.form}>
             <div>
-               <Field placeholder={'Your post message'} name={'postText'} component={Textarea}
-                      validate={[required, maxLength200]}/>
+               <Field placeholder={'Что вы думаете?'} name={'postText'} component={Textarea}
+                      validate={[maxLength200]}/>
             </div>
             <div className={s.button}>
                <button>Добавить</button>

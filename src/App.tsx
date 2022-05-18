@@ -35,7 +35,7 @@ class App extends React.Component<AppPropsType, initialStateAuthType> {
          <div>
             <HeaderContainer/>
             <div className="app-wrapper">
-               <NavbarContainer/>
+               {this.props.auth.isAuth && <NavbarContainer/>}
                <div className="app-wrapper-content">
                   <Route path="/" exact render={() => <Redirect to="/profile"/>}/>
                   <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
@@ -54,6 +54,7 @@ class App extends React.Component<AppPropsType, initialStateAuthType> {
 
 type mapStateToPropsType = {
    app: initialStateAppType
+   auth: initialStateAuthType
 }
 type mapDispatchToPropsType = {
    initializeApp: () => void
@@ -63,6 +64,7 @@ type AppPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
    app: state.app,
+   auth: state.auth,
 })
 
 export default compose<React.ComponentType>(

@@ -4,6 +4,7 @@ import {Preloader} from '../../common/Preloader/Preloader'
 import {ContactsProfileType, profileType} from '../../../redux/Propfile/types'
 import {EditableSpan} from '../../common/EditableSpan/EditableSpan'
 import ProfileDataFormFromRedux, {FormProfileDataType} from './ProfileDataForm'
+import {FileInput} from '../../common/FileInput/FileInput'
 
 type ProfileInfoPropsType = {
    profile: profileType
@@ -38,7 +39,10 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
          <div className={s.profile}>
             <div className={s.main}>
                <img src={photos.large || 'https://dummyimage.com/300x300&text=avatar'} alt={'avatar'}/>
-               {isOwner && <input className={s.changePhoto} type={'file'} onChange={onMainPhotoSelected}/>}
+               {
+                  isOwner &&
+                 <FileInput fileSelected={onMainPhotoSelected} buttonText={'Изменить фото'}/>
+               }
             </div>
             <div className={s.info}>
                <h2>{fullName}</h2>
@@ -60,12 +64,17 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
 }
 
 
-type ProfileDataPropsType = {
-   profile: profileType
-   isOwner: boolean
-   toEditMode: () => void
-}
-const ProfileData = ({profile, isOwner, toEditMode}: ProfileDataPropsType) => {
+type ProfileDataPropsType =
+   {
+      profile: profileType
+      isOwner: boolean
+      toEditMode: () => void
+   }
+const ProfileData = (
+   {
+      profile, isOwner, toEditMode,
+   }
+      : ProfileDataPropsType) => {
    const {lookingForAJob, lookingForAJobDescription, aboutMe} = profile
    return (
       <div className={s.profileData}>
@@ -87,7 +96,15 @@ const ProfileData = ({profile, isOwner, toEditMode}: ProfileDataPropsType) => {
    )
 }
 
-const Contacts = ({contacts}: { contacts: ContactsProfileType }) => {
+const Contacts = (
+   {
+      contacts,
+   }
+      :
+      {
+         contacts: ContactsProfileType
+      },
+) => {
    const {vk, instagram, mainLink, youtube, website, twitter, facebook, github} = contacts
    return (
       <div>
@@ -108,19 +125,22 @@ const Contacts = ({contacts}: { contacts: ContactsProfileType }) => {
                               rel="noreferrer" target={'_blank'}>{instagram}</a> || '-----'}
             </div>
             <div>
-               Twitter: {<a href={twitter?.toString()} rel="noreferrer" target={'_blank'}>{twitter}</a> || '-----'}
+               Twitter: {<a href={twitter?.toString()} rel="noreferrer"
+                            target={'_blank'}>{twitter}</a> || '-----'}
             </div>
             <div>
-               Website: {<a href={website?.toString()} rel="noreferrer" target={'_blank'}>{website}</a> || '-----'}
+               Website: {<a href={website?.toString()} rel="noreferrer"
+                            target={'_blank'}>{website}</a> || '-----'}
             </div>
             <div>
-               YouTube: {<a href={youtube?.toString()} rel="noreferrer" target={'_blank'}>{youtube}</a> || '-----'}
+               YouTube: {<a href={youtube?.toString()} rel="noreferrer"
+                            target={'_blank'}>{youtube}</a> || '-----'}
             </div>
             <div>
-               Email: {<a href={mainLink?.toString()} rel="noreferrer" target={'_blank'}>{mainLink}</a> || '-----'}
+               Email: {<a href={mainLink?.toString()} rel="noreferrer"
+                          target={'_blank'}>{mainLink}</a> || '-----'}
             </div>
          </div>
       </div>
    )
 }
-

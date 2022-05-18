@@ -19,7 +19,7 @@ export const Profile = ({profilePage, addPost, updateUserStatus, isOwner, savePh
       <div className={s.profilePage}>
          <ProfileInfo profile={profilePage.profile} status={profilePage.status} updateStatus={updateUserStatus}
                       isOwner={isOwner} savePhoto={savePhoto} saveProfile={saveProfile}/>
-         <MyPosts posts={profilePage.posts} addPost={addPost}/>
+         <MyPosts posts={profilePage.posts} addPost={addPost} isOwner={isOwner} owner={profilePage.profile.fullName}/>
       </div>
    )
 }

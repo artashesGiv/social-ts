@@ -4,7 +4,7 @@ import NavbarItem from './NavbarItem/NavbarItem'
 import {NavbarPropsType} from './NavbarContainer'
 
 export const Navbar = ({elements}: NavbarPropsType) => {
-   let navbarElements = elements
+   const navbarElements = elements
       .map(el => <NavbarItem key={el.name} name={el.name} link={el.link}/>)
 
    return (

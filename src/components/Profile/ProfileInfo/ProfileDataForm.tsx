@@ -24,9 +24,6 @@ const maxLength1000 = maxLength(1000)
 const ProfileDataForm = ({handleSubmit, error}: InjectedFormProps<FormProfileDataType>) => {
    return (
       <form onSubmit={handleSubmit} className={s.profileData}>
-         {
-            error && <div>{error}</div>
-         }
          <div>
             <h3>Общие:</h3>
             <div>
@@ -38,14 +35,15 @@ const ProfileDataForm = ({handleSubmit, error}: InjectedFormProps<FormProfileDat
                                                      component={Textarea} validate={[required, maxLength1000]}/>
             </div>
             <div>
-               AboutMe: <Field placeholder={'About me'} name={'aboutMe'} component={Textarea} validate={[required, maxLength1000]}/>
+               AboutMe: <Field placeholder={'About me'} name={'aboutMe'} component={Textarea}
+                               validate={[required, maxLength1000]}/>
             </div>
          </div>
          <div>
             <h3>Контакты:</h3>
             <div>
                GitHub:
-               <Field placeholder={'GitGub'} name={'contacts.github'} validate={[required]} component={Input}/>
+               <Field placeholder={'GitHub'} name={'contacts.github'} validate={[required]} component={Input}/>
             </div>
             <div>
                VK:
@@ -76,6 +74,9 @@ const ProfileDataForm = ({handleSubmit, error}: InjectedFormProps<FormProfileDat
                <Field placeholder={'MailLink'} name={'contacts.mainLink'} validate={[required]} component={Input}/>
             </div>
          </div>
+         {
+            error && <div style={{color: 'red', border: '1px solid red'}}>{error}</div>
+         }
          <button className={s.editButton}>Сохранить</button>
       </form>
    )

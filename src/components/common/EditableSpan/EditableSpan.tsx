@@ -26,10 +26,10 @@ export const EditableSpan = (props: ProfileStatusPropsType) => {
    }, [props.value])
 
    return (
-      <div>
+      <div className={props.className}>
          {
             !editMode &&
-           <div className={props.className} onClick={activateEditMode}>
+           <div onClick={activateEditMode}>
              <span>{props.value || props.defaultValue}</span>
            </div>
          }
