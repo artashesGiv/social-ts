@@ -41,6 +41,7 @@ class App extends React.Component<AppPropsType, initialStateAuthType> {
                   <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
                   <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
                   <Route path="/users" render={withSuspense(UsersContainer)}/>
+                  <Route path="/friends" render={withSuspense(UsersContainer)}/>
                   <Route path="/news" component={News}/>
                   <Route path="/music" component={Music}/>
                   <Route path="/settings" component={Settings}/>

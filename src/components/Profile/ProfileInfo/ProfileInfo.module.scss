@@ -15,6 +15,10 @@
    .main {
       width: min(330px, 27%);
 
+      button {
+         @include Button;
+      }
+
       img {
          border-radius: 6px;
       }

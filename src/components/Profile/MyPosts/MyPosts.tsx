@@ -26,9 +26,12 @@ export const MyPosts = ({posts, addPost, isOwner, owner}: MyPostsPropsType) => {
       <div className={s.postsBlock}>
          <div className={s.wrapper}>
             <h3>{isOwner ? 'Мои записи' : `Записи ${owner}`}</h3>
-            <div>
-               <AddPostForm onSubmit={addNewPost}/>
-            </div>
+            {
+               isOwner &&
+              <div>
+                <AddPostForm onSubmit={addNewPost}/>
+              </div>
+            }
             <div className={s.posts}>
                {postsElement}
             </div>

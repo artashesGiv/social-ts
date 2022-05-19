@@ -2,6 +2,7 @@ import {initialStateUsersType, userType} from './types'
 import {usersAPI} from '../../api/api'
 import {Dispatch} from 'redux'
 import {updateObjectInArray} from '../../utils/object-helpers'
+import {getFollowedStatus, setFriends} from '../Propfile/profileReducer'
 
 const FOLLOW = 'users/FOLLOW'
 const UNFOLLOW = 'users/UNFOLLOW'
@@ -59,6 +60,7 @@ type actionsTypes = ReturnType<typeof follow>
    | ReturnType<typeof setTotalUsersCount>
    | ReturnType<typeof toggleIsFetching>
    | ReturnType<typeof toggleIsFetchingProgress>
+   | ReturnType<typeof setFriends>
 
 export const follow = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollow = (userId: number) => ({type: UNFOLLOW, userId} as const)
@@ -72,10 +74,13 @@ export const toggleIsFetchingProgress = (followingInProgress: boolean, userId: n
    userId,
 } as const)
 
-export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: Dispatch<actionsTypes>) => {
+export const getUsers = (currentPage: number, pageSize: number, isFriends: boolean) => async (dispatch: Dispatch<actionsTypes>) => {
    dispatch(toggleIsFetching(true))
-   const res = await usersAPI.getUsers(currentPage, pageSize)
+   const res = !isFriends
+      ? await usersAPI.getUsers(currentPage, pageSize)
+      : await usersAPI.getFriends(currentPage, pageSize)
    dispatch(toggleIsFetching(false))
+   dispatch(setFriends(res.data.items))
    dispatch(setUsers(res.data.items))
    dispatch(setTotalUsersCount(res.data.totalCount))
    dispatch(setCurrentPage(currentPage))
@@ -86,6 +91,8 @@ export const getUsers = (currentPage: number, pageSize: number) => async (dispat
 const followUnfollowFlow = async (dispatch: Dispatch<actionsTypes>, userId: number, apiMethod: any, actionCreator: any) => { // fix any
    dispatch(toggleIsFetchingProgress(true, userId))
    const res = await apiMethod(userId)
+   // @ts-ignore
+   dispatch(getFollowedStatus(userId))
    if (res.data.resultCode === 0) {
       dispatch(actionCreator(userId))
    }

@@ -13,12 +13,20 @@ export const usersAPI = {
       return instance.get(`users?page=${currentPage}&count=${pageSize}`)
    },
 
+   getFriends(currentPage: number = 1, pageSize: number = 10) {
+      return instance.get(`users?page=${currentPage}&count=${pageSize}&friend=true`)
+   },
+
    unfollowUser(userId: number) {
       return instance.delete(`follow/${userId}`)
    },
 
    followUser(userId: number) {
       return instance.post(`follow/${userId}`)
+   },
+
+   getFollowStatus(userId: number) {
+      return instance.get(`follow/${userId}`)
    },
 }
 

@@ -1,0 +1,27 @@
+@import 'src/style/common';
+
+.user {
+   @include Block;
+   display: flex;
+   align-items: center;
+   gap: 30px;
+
+   .button {
+      flex-grow: 1;
+   }
+
+   .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      box-shadow: $shadow;
+
+      &:hover {
+         box-shadow: 0 0 5px 2px $main-color;
+      }
+   }
+
+   a {
+      font-weight: bold;
+   }
+}

@@ -1,13 +1,10 @@
-
-type photosType = {
-   small: string
-   large: string
-}
-
 export type userType = {
    name: string
    id: number
-   photos: photosType
+   photos: {
+      small: string
+      large: string
+   }
    status: string
    followed: boolean
 }

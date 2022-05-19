@@ -5,18 +5,38 @@ import {ContactsProfileType, profileType} from '../../../redux/Propfile/types'
 import {EditableSpan} from '../../common/EditableSpan/EditableSpan'
 import ProfileDataFormFromRedux, {FormProfileDataType} from './ProfileDataForm'
 import {FileInput} from '../../common/FileInput/FileInput'
+import {userType} from '../../../redux/Users/types'
+import {UsersListSmall} from '../../common/UsersListSmall/UsersListSmall'
+import {FollowButton} from '../../common/FollowButton/FollowButton'
+import {NavLink} from 'react-router-dom'
 
 type ProfileInfoPropsType = {
    profile: profileType
    status: string
    updateStatus: (status: string) => void
    isOwner: boolean
+   userId: number
+   followed: boolean
+   subscriptions: userType[]
+   followingInProgress: number[]
    savePhoto: (photo: File) => void
    saveProfile: (profile: any) => any
+   followUser: (userId: number) => void
+   unfollowUser: (userId: number) => void
 }
 
-export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfileInfoPropsType) => {
-
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
+                                                               profile,
+                                                               status, updateStatus,
+                                                               isOwner,
+                                                               savePhoto,
+                                                               saveProfile,
+                                                               subscriptions,
+                                                               followUser, unfollowUser,
+                                                               followingInProgress,
+                                                               userId,
+                                                               followed,
+                                                            }) => {
    const [editMode, setEditMode] = useState(false)
    const {photos, fullName} = profile
 
@@ -40,8 +60,19 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
             <div className={s.main}>
                <img src={photos.large || 'https://dummyimage.com/300x300&text=avatar'} alt={'avatar'}/>
                {
+                  isOwner
+                     ? <FileInput fileSelected={onMainPhotoSelected} buttonText={'Изменить фото'}/>
+                     : <FollowButton width={'100%'} userId={userId} followed={followed} followingInProgress={followingInProgress} follow={followUser}
+                                     unfollow={unfollowUser}/>
+               }
+               {
                   isOwner &&
-                 <FileInput fileSelected={onMainPhotoSelected} buttonText={'Изменить фото'}/>
+                 <>
+                   <NavLink to={'/friends'} style={{textDecoration: 'none'}}>
+                     <h3>Подписки</h3>
+                   </NavLink>
+                   <UsersListSmall list={subscriptions} count={6}/>
+                 </>
                }
             </div>
             <div className={s.info}>
@@ -64,17 +95,12 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
 }
 
 
-type ProfileDataPropsType =
-   {
-      profile: profileType
-      isOwner: boolean
-      toEditMode: () => void
-   }
-const ProfileData = (
-   {
-      profile, isOwner, toEditMode,
-   }
-      : ProfileDataPropsType) => {
+type ProfileDataPropsType = {
+   profile: profileType
+   isOwner: boolean
+   toEditMode: () => void
+}
+const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, toEditMode}) => {
    const {lookingForAJob, lookingForAJobDescription, aboutMe} = profile
    return (
       <div className={s.profileData}>
@@ -95,16 +121,7 @@ const ProfileData = (
       </div>
    )
 }
-
-const Contacts = (
-   {
-      contacts,
-   }
-      :
-      {
-         contacts: ContactsProfileType
-      },
-) => {
+const Contacts: React.FC<{ contacts: ContactsProfileType }> = ({contacts}) => {
    const {vk, instagram, mainLink, youtube, website, twitter, facebook, github} = contacts
    return (
       <div>
@@ -144,3 +161,6 @@ const Contacts = (
       </div>
    )
 }
+
+
+

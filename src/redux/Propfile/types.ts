@@ -1,3 +1,5 @@
+import {userType} from '../Users/types'
+
 export type profileType = {
    aboutMe: string | null
    contacts: ContactsProfileType
@@ -32,4 +34,7 @@ export type initialStateProfileType = {
    profile: profileType
    posts: postType[]
    status: string
+   friends: userType[]
+   followed: boolean
+   isFetching: boolean
 }

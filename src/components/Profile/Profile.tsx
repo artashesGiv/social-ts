@@ -11,14 +11,31 @@ type ProfileProps = {
    updateUserStatus: (status: string) => void
    savePhoto: (photo: File) => void
    saveProfile: (profile: any) => void
+   followUser: (userId: number) => void
+   unfollowUser: (userId: number) => void
+   followingInProgress: number[]
+   userId: number
 }
 
-export const Profile = ({profilePage, addPost, updateUserStatus, isOwner, savePhoto, saveProfile}: ProfileProps) => {
+export const Profile = ({
+                           profilePage,
+                           addPost,
+                           updateUserStatus,
+                           isOwner,
+                           savePhoto,
+                           saveProfile,
+                           unfollowUser,
+                           followUser,
+                           followingInProgress,
+                           userId,
+                        }: ProfileProps) => {
 
    return (
       <div className={s.profilePage}>
          <ProfileInfo profile={profilePage.profile} status={profilePage.status} updateStatus={updateUserStatus}
-                      isOwner={isOwner} savePhoto={savePhoto} saveProfile={saveProfile}/>
+                      isOwner={isOwner} savePhoto={savePhoto} saveProfile={saveProfile}
+                      subscriptions={profilePage.friends} followUser={followUser} unfollowUser={unfollowUser}
+                      followingInProgress={followingInProgress} userId={userId} followed={profilePage.followed}/>
          <MyPosts posts={profilePage.posts} addPost={addPost} isOwner={isOwner} owner={profilePage.profile.fullName}/>
       </div>
    )
