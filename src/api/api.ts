@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {profileType} from '../redux/Propfile/types'
 
 const instance = axios.create({
    withCredentials: true,
@@ -67,7 +68,13 @@ export const profileAPI = {
       })
    },
 
-   saveProfile(profile: any) {
+   saveProfile(profile: profileType) {
       return instance.put('profile', profile)
    },
+}
+
+export const securityAPI = {
+   getCaptchaUrl() {
+      return instance.get('security/get-captcha-url')
+   }
 }

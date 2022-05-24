@@ -37,7 +37,7 @@ type FormDataType = {
 const LoginForm = (props: InjectedFormProps<FormDataType>) => {
    const {handleSubmit} = props
    return (
-      <form onSubmit={handleSubmit}  className={s.form}>
+      <form onSubmit={handleSubmit} className={s.form}>
          <div>
             <Field placeholder={'Login'} name={'login'} component={Input} validate={[required]}/>
          </div>
@@ -61,6 +61,7 @@ const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
 type LoginPropsType = MapSateToPropsType & MapDispatchToPropsType
 type MapSateToPropsType = {
+   captchaUrl: string | null
    auth: initialStateAuthType
 }
 type MapDispatchToPropsType = {
@@ -69,6 +70,7 @@ type MapDispatchToPropsType = {
 
 
 const mapStateToProps = (state: AppStateType): MapSateToPropsType => ({
+   captchaUrl: state.auth.captchaUrl,
    auth: state.auth,
 })
 
